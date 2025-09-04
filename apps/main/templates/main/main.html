@@ -1,4 +1,7 @@
 {%extends 'main/base.html'%}
+{%load static%}
+
+{%block title%} {{title}} {%endblock title%}
 
 {%block content%}
     <main id="main-content">
@@ -43,7 +46,7 @@
 
                     <div class="hero-image">
                         <div class="image-container">
-                            <img src="unnamed.png"
+                            <img src="{% static 'main/images/img.png' %}"
                                  alt="ERGONESTO підставка для ніг - ергономічний дизайн з регульованою висотою"
                                  class="product-image"
                                  width="500"
@@ -148,7 +151,7 @@
                         </div>
                     </div>
                     <div class="story-image">
-                        <img src="https://via.placeholder.com/400x300/3C332C/F9F1EA?text=Наша+команда"
+                        <img src="{% static 'main/images/team.png' %}"
                              alt="Команда ERGONESTO за роботою над новими продуктами"
                              class="team-image"
                              width="400"
