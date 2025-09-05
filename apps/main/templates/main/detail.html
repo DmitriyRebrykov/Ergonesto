@@ -1,0 +1,885 @@
+{%extends 'main/base.html'%}
+{%load static%}
+
+{%block link%}<link type="text/css" href="{% static 'main/css/detail.css' %}" rel="stylesheet">{%endblock link%}
+{%block content%}
+    <main class="product-page">
+        <div class="container">
+             Product Overview
+            <section class="product-overview">
+                <div class="product-gallery">
+                    <div class="main-image">
+                        <img src="{%static 'main/images/img.png'%}" alt="ERGONESTO підставка для ніг - основне зображення" class="product-main-image" id="main-product-image" width="600" height="600">
+                        <div class="image-zoom-overlay" id="zoom-overlay"></div>
+                    </div>
+                    <div class="thumbnail-gallery">
+                        <button class="thumbnail active" data-image="unnamed.png" data-alt="Основний вигляд підставки">
+                            <img src="unnamed.png" alt="Основний вигляд" width="80" height="80">
+                        </button>
+                        <button class="thumbnail" data-image="https://via.placeholder.com/600x600/F3D3B4/1E1B17?text=Вигляд+збоку" data-alt="Вигляд збоку підставки">
+                            <img src="https://via.placeholder.com/80x80/F3D3B4/1E1B17?text=Збоку" alt="Вигляд збоку" width="80" height="80">
+                        </button>
+                        <button class="thumbnail" data-image="https://via.placeholder.com/600x600/F3D3B4/1E1B17?text=Регулювання+висоти" data-alt="Демонстрація регулювання висоти">
+                            <img src="https://via.placeholder.com/80x80/F3D3B4/1E1B17?text=Висота" alt="Регулювання висоти" width="80" height="80">
+                        </button>
+                        <button class="thumbnail" data-image="https://via.placeholder.com/600x600/F3D3B4/1E1B17?text=Матеріали" data-alt="Деталі матеріалів та якості">
+                            <img src="https://via.placeholder.com/80x80/F3D3B4/1E1B17?text=Матеріал" alt="Матеріали" width="80" height="80">
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-info">
+                    <div class="product-header">
+                        <h1 class="product-title">ERGONESTO Ергономічна підставка для ніг</h1>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-text">4.9 (2,500 відгуків)</span>
+                        </div>
+                        <div class="product-sku">Артикул: ERG-FOOT-001</div>
+                    </div>
+
+                    <div class="product-price">
+                        <div class="current-price">2,499 ₴</div>
+                        <div class="old-price">3,199 ₴</div>
+                        <div class="discount-badge">-22%</div>
+                    </div>
+
+                    <div class="product-availability">
+                        <div class="availability-status in-stock">
+                            <i class="fas fa-check-circle"></i>
+                            <span>В наявності</span>
+                        </div>
+                        <div class="stock-info">Залишилось: <strong>47 шт.</strong></div>
+                    </div>
+
+                    <div class="product-features">
+                        <ul class="features-list">
+                            <li><i class="fas fa-check"></i> 5 рівнів регулювання висоти</li>
+                            <li><i class="fas fa-check"></i> Натуральне дерево + м'яка подушка</li>
+                            <li><i class="fas fa-check"></i> Максимальне навантаження: 100 кг</li>
+                            <li><i class="fas fa-check"></i> Гарантія 2 роки</li>
+                            <li><i class="fas fa-check"></i> Безкоштовна доставка</li>
+                        </ul>
+                    </div>
+
+                    <div class="product-options">
+                        <div class="option-group">
+                            <label class="option-label">Колір подушки:</label>
+                            <div class="color-options">
+                                <button class="color-option active" data-color="brown" aria-label="Коричневий">
+                                    <span class="color-swatch" style="background-color: #8B4513;"></span>
+                                    <span class="color-name">Коричневий</span>
+                                </button>
+                                <button class="color-option" data-color="black" aria-label="Чорний">
+                                    <span class="color-swatch" style="background-color: #2C2C2C;"></span>
+                                    <span class="color-name">Чорний</span>
+                                </button>
+                                <button class="color-option" data-color="gray" aria-label="Сірий">
+                                    <span class="color-swatch" style="background-color: #808080;"></span>
+                                    <span class="color-name">Сірий</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="option-group">
+                            <label class="option-label">Кількість:</label>
+                            <div class="quantity-selector">
+                                <button class="quantity-btn minus" type="button" aria-label="Зменшити кількість">-</button>
+                                <input type="number" class="quantity-input" value="1" min="1" max="10" aria-label="Кількість товару">
+                                <button class="quantity-btn plus" type="button" aria-label="Збільшити кількість">+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-actions">
+                        <button class="btn btn-primary btn-large add-to-cart" type="button">
+                            <i class="fas fa-shopping-cart"></i>
+                            Додати в кошик
+                        </button>
+                        <button class="btn btn-outline btn-large buy-now" type="button">
+                            <i class="fas fa-bolt"></i>
+                            Купити зараз
+                        </button>
+                        <button class="btn-icon wishlist-btn" type="button" aria-label="Додати в список бажань">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+
+                    <div class="delivery-info">
+                        <div class="delivery-item">
+                            <i class="fas fa-truck"></i>
+                            <div>
+                                <strong>Безкоштовна доставка</strong>
+                                <span>по всій Україні від 1000 ₴</span>
+                            </div>
+                        </div>
+                        <div class="delivery-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <strong>Швидка доставка</strong>
+                                <span>1-3 робочих дні</span>
+                            </div>
+                        </div>
+                        <div class="delivery-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <div>
+                                <strong>Гарантія якості</strong>
+                                <span>2 роки гарантії</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+             Product Details Tabs
+            <section class="product-details">
+                <div class="tabs-container">
+                    <div class="tabs-nav" role="tablist">
+                        <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="description-panel" id="description-tab">
+                            Опис
+                        </button>
+                        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="specifications-panel" id="specifications-tab">
+                            Характеристики
+                        </button>
+                        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="instructions-panel" id="instructions-tab">
+                            Інструкція
+                        </button>
+                        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="delivery-panel" id="delivery-tab">
+                            Доставка
+                        </button>
+                        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="warranty-panel" id="warranty-tab">
+                            Гарантія
+                        </button>
+                        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="reviews-panel" id="reviews-tab">
+                            Відгуки (2,500)
+                        </button>
+                    </div>
+
+                    <div class="tabs-content">
+                         Description Panel
+                        <div class="tab-panel active" role="tabpanel" aria-labelledby="description-tab" id="description-panel">
+                            <div class="description-content">
+                                <h3>Детальний опис продукту</h3>
+                                <p>
+                                    ERGONESTO - це преміальна ергономічна підставка для ніг, розроблена спеціально для офісних працівників,
+                                    які проводять багато часу за робочим столом. Наш продукт поєднує в собі інноваційний дизайн,
+                                    високоякісні матеріали та науково обґрунтовані ергономічні принципи.
+                                </p>
+
+                                <h4>Основні переваги:</h4>
+                                <ul>
+                                    <li><strong>Покращення кровообігу:</strong> Правильне положення ніг сприяє кращому кровообігу та зменшує втому</li>
+                                    <li><strong>Зменшення болю в спині:</strong> Підтримка правильної постави знижує навантаження на хребет</li>
+                                    <li><strong>Підвищення продуктивності:</strong> Комфортне робоче місце покращує концентрацію та ефективність</li>
+                                    <li><strong>Універсальність:</strong> Підходить для будь-якого типу робочого столу та стільця</li>
+                                </ul>
+
+                                <h4>Матеріали та якість:</h4>
+                                <p>
+                                    Корпус виготовлений з високоякісного натурального дерева з екологічним покриттям.
+                                    М'яка подушка виконана з гіпоалергенного матеріалу з ефектом пам'яті, що забезпечує
+                                    максимальний комфорт навіть при тривалому використанні.
+                                </p>
+
+                                <div class="product-gallery-description">
+                                    <img src="https://via.placeholder.com/800x400/F3D3B4/1E1B17?text=Детальний+вигляд+матеріалів"
+                                         alt="Детальний вигляд матеріалів підставки"
+                                         class="description-image"
+                                         width="800"
+                                         height="400">
+                                </div>
+                            </div>
+                        </div>
+
+                         Specifications Panel
+                        <div class="tab-panel" role="tabpanel" aria-labelledby="specifications-tab" id="specifications-panel">
+                            <div class="specifications-content">
+                                <h3>Технічні характеристики</h3>
+                                <div class="specs-grid">
+                                    <div class="spec-group">
+                                        <h4>Розміри та вага</h4>
+                                        <table class="specs-table">
+                                            <tr>
+                                                <td>Довжина</td>
+                                                <td>45 см</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Ширина</td>
+                                                <td>35 см</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Висота (мін/макс)</td>
+                                                <td>10-20 см</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Вага</td>
+                                                <td>2.5 кг</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+                                    <div class="spec-group">
+                                        <h4>Матеріали</h4>
+                                        <table class="specs-table">
+                                            <tr>
+                                                <td>Корпус</td>
+                                                <td>Натуральне дерево (бук)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Подушка</td>
+                                                <td>Memory foam + еко-шкіра</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Покриття</td>
+                                                <td>Екологічний лак</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Фурнітура</td>
+                                                <td>Нержавіюча сталь</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+                                    <div class="spec-group">
+                                        <h4>Функціональність</h4>
+                                        <table class="specs-table">
+                                            <tr>
+                                                <td>Рівні регулювання</td>
+                                                <td>5 позицій</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Максимальне навантаження</td>
+                                                <td>100 кг</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Кут нахилу</td>
+                                                <td>0-15°</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Антиковзне покриття</td>
+                                                <td>Так</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+                                    <div class="spec-group">
+                                        <h4>Сертифікати</h4>
+                                        <table class="specs-table">
+                                            <tr>
+                                                <td>Екологічність</td>
+                                                <td>FSC сертифікат</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Якість</td>
+                                                <td>ISO 9001</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Безпека</td>
+                                                <td>CE маркування</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Ергономіка</td>
+                                                <td>Схвалено ортопедами</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                         Instructions Panel
+                        <div class="tab-panel" role="tabpanel" aria-labelledby="instructions-tab" id="instructions-panel">
+                            <div class="instructions-content">
+                                <h3>Інструкція з використання</h3>
+
+                                <div class="instruction-section">
+                                    <h4><i class="fas fa-box-open"></i> Розпакування</h4>
+                                    <ol>
+                                        <li>Обережно витягніть підставку з коробки</li>
+                                        <li>Перевірте комплектність (підставка, інструкція, гарантійний талон)</li>
+                                        <li>Огляньте виріб на предмет пошкоджень</li>
+                                        <li>При виявленні дефектів негайно зверніться до служби підтримки</li>
+                                    </ol>
+                                </div>
+
+                                <div class="instruction-section">
+                                    <h4><i class="fas fa-cogs"></i> Налаштування</h4>
+                                    <ol>
+                                        <li>Розмістіть підставку під робочим столом</li>
+                                        <li>Відрегулюйте висоту за допомогою механізму регулювання</li>
+                                        <li>Встановіть комфортний кут нахилу (за потреби)</li>
+                                        <li>Переконайтесь, що підставка стійко стоїть на підлозі</li>
+                                    </ol>
+
+                                    <div class="instruction-image">
+                                        <img src="https://via.placeholder.com/600x300/F3D3B4/1E1B17?text=Схема+налаштування"
+                                             alt="Схема налаштування підставки"
+                                             width="600"
+                                             height="300">
+                                    </div>
+                                </div>
+
+                                <div class="instruction-section">
+                                    <h4><i class="fas fa-user-check"></i> Правильне використання</h4>
+                                    <div class="usage-tips">
+                                        <div class="tip-card">
+                                            <div class="tip-icon">
+                                                <i class="fas fa-check-circle"></i>
+                                            </div>
+                                            <div class="tip-content">
+                                                <h5>Правильна позиція</h5>
+                                                <p>Ноги повинні повністю стояти на підставці, коліна під кутом 90-110°</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="tip-card">
+                                            <div class="tip-icon">
+                                                <i class="fas fa-clock"></i>
+                                            </div>
+                                            <div class="tip-content">
+                                                <h5>Періодичність</h5>
+                                                <p>Робіть перерви кожні 30-45 хвилин, змінюйте положення ніг</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="tip-card">
+                                            <div class="tip-icon">
+                                                <i class="fas fa-adjust"></i>
+                                            </div>
+                                            <div class="tip-content">
+                                                <h5>Регулювання</h5>
+                                                <p>Підбирайте висоту індивідуально під свій зріст та стіл</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="instruction-section">
+                                    <h4><i class="fas fa-broom"></i> Догляд та обслуговування</h4>
+                                    <ul class="care-list">
+                                        <li>Протирайте поверхню вологою тканиною щотижня</li>
+                                        <li>Використовуйте м'які миючі засоби без абразивів</li>
+                                        <li>Уникайте прямого сонячного світла та нагрівальних приладів</li>
+                                        <li>Перевіряйте кріплення раз на місяць</li>
+                                        <li>При необхідності змащуйте механізм регулювання</li>
+                                    </ul>
+                                </div>
+
+                                <div class="warning-section">
+                                    <h4><i class="fas fa-exclamation-triangle"></i> Важливі застереження</h4>
+                                    <div class="warning-box">
+                                        <ul>
+                                            <li>Не перевищуйте максимальне навантаження 100 кг</li>
+                                            <li>Не використовуйте як сходинку або підставку</li>
+                                            <li>Не залишайте на підставці важкі предмети</li>
+                                            <li>При пошкодженні припиніть використання</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                         Delivery Panel
+                        <div class="tab-panel" role="tabpanel" aria-labelledby="delivery-tab" id="delivery-panel">
+                            <div class="delivery-content">
+                                <h3>Доставка та оплата</h3>
+
+                                <div class="delivery-options">
+                                    <div class="delivery-option">
+                                        <div class="option-header">
+                                            <i class="fas fa-truck"></i>
+                                            <h4>Кур'єрська доставка</h4>
+                                        </div>
+                                        <div class="option-details">
+                                            <p><strong>Вартість:</strong> Безкоштовно від 1000 ₴, інакше 150 ₴</p>
+                                            <p><strong>Терміни:</strong> 1-2 робочих дні</p>
+                                            <p><strong>Зони доставки:</strong> Київ, Харків, Одеса, Дніпро, Львів</p>
+                                            <p><strong>Час доставки:</strong> 9:00-18:00 (за домовленістю)</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="delivery-option">
+                                        <div class="option-header">
+                                            <i class="fas fa-store"></i>
+                                            <h4>Нова Пошта</h4>
+                                        </div>
+                                        <div class="option-details">
+                                            <p><strong>Вартість:</strong> За тарифами НП (від 80 ₴)</p>
+                                            <p><strong>Терміни:</strong> 1-3 робочих дні</p>
+                                            <p><strong>Відділення:</strong> Понад 5000 по всій Україні</p>
+                                            <p><strong>Поштомати:</strong> Цілодобово в зручних місцях</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="delivery-option">
+                                        <div class="option-header">
+                                            <i class="fas fa-shipping-fast"></i>
+                                            <h4>УкрПошта</h4>
+                                        </div>
+                                        <div class="option-details">
+                                            <p><strong>Вартість:</strong> За тарифами УП (від 60 ₴)</p>
+                                            <p><strong>Терміни:</strong> 2-5 робочих днів</p>
+                                            <p><strong>Відділення:</strong> В кожному населеному пункті</p>
+                                            <p><strong>Адресна доставка:</strong> Доступна в більшості міст</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="payment-methods">
+                                    <h4>Способи оплати</h4>
+                                    <div class="payment-grid">
+                                        <div class="payment-method">
+                                            <i class="fas fa-credit-card"></i>
+                                            <span>Банківська картка</span>
+                                        </div>
+                                        <div class="payment-method">
+                                            <i class="fas fa-money-bill-wave"></i>
+                                            <span>Готівка при отриманні</span>
+                                        </div>
+                                        <div class="payment-method">
+                                            <i class="fas fa-university"></i>
+                                            <span>Банківський переказ</span>
+                                        </div>
+                                        <div class="payment-method">
+                                            <i class="fas fa-mobile-alt"></i>
+                                            <span>Apple Pay / Google Pay</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="delivery-info-box">
+                                    <h4><i class="fas fa-info-circle"></i> Важлива інформація</h4>
+                                    <ul>
+                                        <li>Безкоштовна доставка діє для замовлень від 1000 ₴</li>
+                                        <li>Товар можна оглянути перед оплатою</li>
+                                        <li>Упакування здійснюється в фірмову коробку</li>
+                                        <li>Надаємо трек-номер для відстеження</li>
+                                        <li>SMS повідомлення про статус замовлення</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                         Warranty Panel
+                        <div class="tab-panel" role="tabpanel" aria-labelledby="warranty-tab" id="warranty-panel">
+                            <div class="warranty-content">
+                                <h3>Гарантія та повернення</h3>
+
+                                <div class="warranty-section">
+                                    <div class="warranty-card">
+                                        <div class="warranty-icon">
+                                            <i class="fas fa-shield-alt"></i>
+                                        </div>
+                                        <div class="warranty-info">
+                                            <h4>Гарантія якості</h4>
+                                            <p><strong>2 роки</strong> повної гарантії на всі компоненти</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="warranty-card">
+                                        <div class="warranty-icon">
+                                            <i class="fas fa-undo"></i>
+                                        </div>
+                                        <div class="warranty-info">
+                                            <h4>Право на повернення</h4>
+                                            <p><strong>30 днів</strong> для повернення без пояснення причин</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="warranty-card">
+                                        <div class="warranty-icon">
+                                            <i class="fas fa-tools"></i>
+                                        </div>
+                                        <div class="warranty-info">
+                                            <h4>Безкоштовний ремонт</h4>
+                                            <p>Усунення дефектів за рахунок виробника</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="warranty-details">
+                                    <h4>Гарантійні зобов'язання</h4>
+                                    <div class="warranty-grid">
+                                        <div class="warranty-item">
+                                            <h5>Що покриває гарантія:</h5>
+                                            <ul>
+                                                <li>Дефекти матеріалів та виготовлення</li>
+                                                <li>Несправності механізму регулювання</li>
+                                                <li>Передчасний знос компонентів</li>
+                                                <li>Порушення цілісності конструкції</li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="warranty-item">
+                                            <h5>Що НЕ покриває гарантія:</h5>
+                                            <ul>
+                                                <li>Механічні пошкодження від неправильного використання</li>
+                                                <li>Природний знос при нормальній експлуатації</li>
+                                                <li>Пошкодження від впливу вологи або хімічних речовин</li>
+                                                <li>Самостійний ремонт або модифікація</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="return-process">
+                                    <h4>Процедура повернення</h4>
+                                    <div class="process-steps">
+                                        <div class="step">
+                                            <div class="step-number">1</div>
+                                            <div class="step-content">
+                                                <h5>Зверніться до нас</h5>
+                                                <p>Телефон, email або онлайн-чат</p>
+                                            </div>
+                                        </div>
+                                        <div class="step">
+                                            <div class="step-number">2</div>
+                                            <div class="step-content">
+                                                <h5>Отримайте RMA номер</h5>
+                                                <p>Унікальний код для відстеження</p>
+                                            </div>
+                                        </div>
+                                        <div class="step">
+                                            <div class="step-number">3</div>
+                                            <div class="step-content">
+                                                <h5>Відправте товар</h5>
+                                                <p>В оригінальній упаковці</p>
+                                            </div>
+                                        </div>
+                                        <div class="step">
+                                            <div class="step-number">4</div>
+                                            <div class="step-content">
+                                                <h5>Отримайте компенсацію</h5>
+                                                <p>Повернення коштів або заміна</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="contact-support">
+                                    <h4>Служба підтримки</h4>
+                                    <div class="support-contacts">
+                                        <div class="contact-item">
+                                            <i class="fas fa-phone"></i>
+                                            <span>+380 (44) 123-45-67</span>
+                                        </div>
+                                        <div class="contact-item">
+                                            <i class="fas fa-envelope"></i>
+                                            <span>support@ergonesto.ua</span>
+                                        </div>
+                                        <div class="contact-item">
+                                            <i class="fas fa-clock"></i>
+                                            <span>Пн-Пт: 9:00-18:00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                         Reviews Panel
+                        <div class="tab-panel" role="tabpanel" aria-labelledby="reviews-tab" id="reviews-panel">
+                            <div class="reviews-content">
+                                <div class="reviews-summary">
+                                    <div class="rating-overview">
+                                        <div class="overall-rating">
+                                            <div class="rating-score">4.9</div>
+                                            <div class="rating-stars">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <div class="rating-count">2,500 відгуків</div>
+                                        </div>
+
+                                        <div class="rating-breakdown">
+                                            <div class="rating-bar">
+                                                <span class="rating-label">5 зірок</span>
+                                                <div class="bar">
+                                                    <div class="bar-fill" style="width: 85%"></div>
+                                                </div>
+                                                <span class="rating-percent">85%</span>
+                                            </div>
+                                            <div class="rating-bar">
+                                                <span class="rating-label">4 зірки</span>
+                                                <div class="bar">
+                                                    <div class="bar-fill" style="width: 12%"></div>
+                                                </div>
+                                                <span class="rating-percent">12%</span>
+                                            </div>
+                                            <div class="rating-bar">
+                                                <span class="rating-label">3 зірки</span>
+                                                <div class="bar">
+                                                    <div class="bar-fill" style="width: 2%"></div>
+                                                </div>
+                                                <span class="rating-percent">2%</span>
+                                            </div>
+                                            <div class="rating-bar">
+                                                <span class="rating-label">2 зірки</span>
+                                                <div class="bar">
+                                                    <div class="bar-fill" style="width: 1%"></div>
+                                                </div>
+                                                <span class="rating-percent">1%</span>
+                                            </div>
+                                            <div class="rating-bar">
+                                                <span class="rating-label">1 зірка</span>
+                                                <div class="bar">
+                                                    <div class="bar-fill" style="width: 0%"></div>
+                                                </div>
+                                                <span class="rating-percent">0%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="reviews-list">
+                                    <div class="review-item">
+                                        <div class="review-header">
+                                            <div class="reviewer-info">
+                                                <div class="reviewer-avatar">
+                                                    <i class="fas fa-user"></i>
+                                                </div>
+                                                <div class="reviewer-details">
+                                                    <div class="reviewer-name">Олександр К.</div>
+                                                    <div class="review-date">15 листопада 2024</div>
+                                                </div>
+                                            </div>
+                                            <div class="review-rating">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                        </div>
+                                        <div class="review-content">
+                                            <p>Відмінна якість! Використовую вже 3 місяці, дуже задоволений. Спина перестала боліти, ноги не набрякають. Регулювання висоти працює плавно. Рекомендую всім офісним працівникам!</p>
+                                        </div>
+                                        <div class="review-helpful">
+                                            <button class="helpful-btn">
+                                                <i class="fas fa-thumbs-up"></i>
+                                                Корисно (24)
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="review-item">
+                                        <div class="review-header">
+                                            <div class="reviewer-info">
+                                                <div class="reviewer-avatar">
+                                                    <i class="fas fa-user"></i>
+                                                </div>
+                                                <div class="reviewer-details">
+                                                    <div class="reviewer-name">Марія В.</div>
+                                                    <div class="review-date">10 листопада 2024</div>
+                                                </div>
+                                            </div>
+                                            <div class="review-rating">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                        </div>
+                                        <div class="review-content">
+                                            <p>Дуже стильно виглядає в офісі. Матеріали якісні, подушка м'яка та зручна. Доставка була швидкою, упаковка надійна. Ціна виправдана якістю.</p>
+                                        </div>
+                                        <div class="review-helpful">
+                                            <button class="helpful-btn">
+                                                <i class="fas fa-thumbs-up"></i>
+                                                Корисно (18)
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="review-item">
+                                        <div class="review-header">
+                                            <div class="reviewer-info">
+                                                <div class="reviewer-avatar">
+                                                    <i class="fas fa-user"></i>
+                                                </div>
+                                                <div class="reviewer-details">
+                                                    <div class="reviewer-name">Андрій П.</div>
+                                                    <div class="review-date">5 листопада 2024</div>
+                                                </div>
+                                            </div>
+                                            <div class="review-rating">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="far fa-star"></i>
+                                            </div>
+                                        </div>
+                                        <div class="review-content">
+                                            <p>Хороша підставка, але хотілося б більше варіантів кольорів. Функціонально все відмінно, зручно регулювати. Можливо, варто зробити ще одну модель для високих людей.</p>
+                                        </div>
+                                        <div class="review-helpful">
+                                            <button class="helpful-btn">
+                                                <i class="fas fa-thumbs-up"></i>
+                                                Корисно (12)
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="load-more-reviews">
+                                    <button class="btn btn-outline">Показати більше відгуків</button>
+                                </div>
+
+                                <div class="write-review">
+                                    <h4>Написати відгук</h4>
+                                    <form class="review-form">
+                                        <div class="form-group">
+                                            <label>Ваша оцінка:</label>
+                                            <div class="rating-input">
+                                                <input type="radio" name="rating" value="5" id="star5">
+                                                <label for="star5"><i class="fas fa-star"></i></label>
+                                                <input type="radio" name="rating" value="4" id="star4">
+                                                <label for="star4"><i class="fas fa-star"></i></label>
+                                                <input type="radio" name="rating" value="3" id="star3">
+                                                <label for="star3"><i class="fas fa-star"></i></label>
+                                                <input type="radio" name="rating" value="2" id="star2">
+                                                <label for="star2"><i class="fas fa-star"></i></label>
+                                                <input type="radio" name="rating" value="1" id="star1">
+                                                <label for="star1"><i class="fas fa-star"></i></label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="reviewer-name">Ваше ім'я:</label>
+                                            <input type="text" id="reviewer-name" name="name" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="review-text">Ваш відгук:</label>
+                                            <textarea id="review-text" name="review" rows="4" required placeholder="Поділіться своїм досвідом використання..."></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Опублікувати відгук</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+             FAQ Section
+            <section class="faq-section">
+                <div class="container">
+                    <h3>Часті питання</h3>
+                    <div class="faq-list">
+                        <div class="faq-item">
+                            <button class="faq-question" type="button" aria-expanded="false">
+                                <span>Чи підходить підставка для всіх типів столів?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Так, ERGONESTO підходить для всіх стандартних робочих столів висотою від 70 до 80 см. Завдяки регульованій висоті (10-20 см) ви зможете налаштувати оптимальне положення для будь-якого стільця.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question" type="button" aria-expanded="false">
+                                <span>Скільки важить підставка?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Вага підставки становить 2.5 кг. Це оптимальна вага для забезпечення стабільності та зручності переміщення.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question" type="button" aria-expanded="false">
+                                <span>Чи можна використовувати без взуття?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Так, м'яка подушка з memory foam забезпечує комфорт навіть при використанні без взуття. Поверхня гіпоалергенна та приємна на дотик.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question" type="button" aria-expanded="false">
+                                <span>Як часто потрібно чистити підставку?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Рекомендуємо протирати поверхню вологою тканиною раз на тиждень. Для глибокого очищення можна використовувати м'які миючі засоби без абразивів.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question" type="button" aria-expanded="false">
+                                <span>Чи є знижки для корпоративних клієнтів?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Так, ми надаємо спеціальні умови для корпоративних замовлень від 10 штук. Зверніться до нашого менеджера для отримання індивідуального комерційного пропозиції.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+             Related Products
+            <section class="related-products">
+                <div class="container">
+                    <h3>Рекомендовані товари</h3>
+                    <div class="products-grid">
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://via.placeholder.com/300x300/F3D3B4/1E1B17?text=Ергономічна+подушка" alt="Ергономічна подушка для спини" width="300" height="300">
+                            </div>
+                            <div class="product-info">
+                                <h4>Ергономічна подушка для спини</h4>
+                                <div class="product-price">1,299 ₴</div>
+                                <button class="btn btn-outline btn-small">Переглянути</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://via.placeholder.com/300x300/F3D3B4/1E1B17?text=Підставка+монітор" alt="Підставка для монітора" width="300" height="300">
+                            </div>
+                            <div class="product-info">
+                                <h4>Підставка для монітора</h4>
+                                <div class="product-price">899 ₴</div>
+                                <button class="btn btn-outline btn-small">Переглянути</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://via.placeholder.com/300x300/F3D3B4/1E1B17?text=Органайзер+стіл" alt="Органайзер для столу" width="300" height="300">
+                            </div>
+                            <div class="product-info">
+                                <h4>Органайзер для столу</h4>
+                                <div class="product-price">599 ₴</div>
+                                <button class="btn btn-outline btn-small">Переглянути</button>
+                            </div>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-image">
+                                <img src="https://via.placeholder.com/300x300/F3D3B4/1E1B17?text=Лампа+настільна" alt="Настільна лампа" width="300" height="300">
+                            </div>
+                            <div class="product-info">
+                                <h4>LED настільна лампа</h4>
+                                <div class="product-price">1,599 ₴</div>
+                                <button class="btn btn-outline btn-small">Переглянути</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <script src="{% static 'main/js/product.js' %}"></script>
+{%endblock%}

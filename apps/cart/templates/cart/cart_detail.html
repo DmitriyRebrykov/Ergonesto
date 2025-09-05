@@ -1,0 +1,378 @@
+{%extends 'main/base.html'%}
+{%load static%}
+
+{%block link%}<link type="text/css" href="{% static 'cart/css/cart_detail.css' %}" rel="stylesheet">{%endblock link%}
+{%block content%}
+        <nav class="breadcrumbs" aria-label="Навігаційна стежка">
+            <div class="container">
+                <ol class="breadcrumb-list">
+                    <li class="breadcrumb-item">
+                        <a href="{%url 'main:view_main_page'%}" class="breadcrumb-link">Головна</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        Кошик покупок
+                    </li>
+                </ol>
+            </div>
+        </nav>
+
+    <!-- Main Content -->
+    <main class="cart-page">
+        <div class="container">
+            <!-- Cart Header -->
+            <div class="cart-header">
+                <h1 class="page-title">Кошик покупок</h1>
+                <div class="cart-steps">
+                    <div class="step active">
+                        <div class="step-number">1</div>
+                        <span class="step-label">Кошик</span>
+                    </div>
+                    <div class="step-divider"></div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <span class="step-label">Оформлення</span>
+                    </div>
+                    <div class="step-divider"></div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <span class="step-label">Підтвердження</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cart Content -->
+            <div class="cart-content">
+                <!-- Cart Items -->
+                <div class="cart-items-section">
+                    <div class="cart-items-header">
+                        <h2>Товари в кошику</h2>
+                        <button class="clear-cart-btn" type="button" aria-label="Очистити кошик">
+                            <i class="fas fa-trash"></i>
+                            Очистити кошик
+                        </button>
+                    </div>
+
+                    <div class="cart-items" id="cart-items">
+                        <!-- Cart Item 1 -->
+                        <div class="cart-item" data-product-id="ERG-FOOT-001">
+                            <div class="item-image">
+                                <img src="{% static 'main/images/img.png' %}" alt="ERGONESTO підставка для ніг" width="120" height="120">
+                            </div>
+
+                            <div class="item-details">
+                                <h3 class="item-name">
+                                    <a href="product.html">ERGONESTO Ергономічна підставка для ніг</a>
+                                </h3>
+                                <div class="item-options">
+                                    <span class="option">Колір: <strong>Коричневий</strong></span>
+                                    <span class="option">Артикул: <strong>ERG-FOOT-001</strong></span>
+                                </div>
+                                <div class="item-availability">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>В наявності</span>
+                                </div>
+                            </div>
+
+                            <div class="item-quantity">
+                                <label class="quantity-label">Кількість:</label>
+                                <div class="quantity-controls">
+                                    <button class="quantity-btn minus" type="button" aria-label="Зменшити кількість" data-action="decrease">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <input type="number" class="quantity-input" value="1" min="1" max="10" aria-label="Кількість товару">
+                                    <button class="quantity-btn plus" type="button" aria-label="Збільшити кількість" data-action="increase">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="item-price">
+                                <div class="current-price">2,499 ₴</div>
+                                <div class="old-price">3,199 ₴</div>
+                                <div class="discount">-22%</div>
+                            </div>
+
+                            <div class="item-total">
+                                <div class="total-price">2,499 ₴</div>
+                            </div>
+
+                            <div class="item-actions">
+                                <button class="action-btn wishlist-btn" type="button" aria-label="Додати в список бажань" data-action="wishlist">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button class="action-btn remove-btn" type="button" aria-label="Видалити товар" data-action="remove">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Cart Item 2 -->
+                        <div class="cart-item" data-product-id="ERG-PILLOW-001">
+                            <div class="item-image">
+                                <img src="{% static 'main/images/img.png' %}" alt="Ергономічна подушка для спини" width="120" height="120">
+                            </div>
+
+                            <div class="item-details">
+                                <h3 class="item-name">
+                                    <a href="#">Ергономічна подушка для спини</a>
+                                </h3>
+                                <div class="item-options">
+                                    <span class="option">Колір: <strong>Чорний</strong></span>
+                                    <span class="option">Артикул: <strong>ERG-PILLOW-001</strong></span>
+                                </div>
+                                <div class="item-availability">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>В наявності</span>
+                                </div>
+                            </div>
+
+                            <div class="item-quantity">
+                                <label class="quantity-label">Кількість:</label>
+                                <div class="quantity-controls">
+                                    <button class="quantity-btn minus" type="button" aria-label="Зменшити кількість" data-action="decrease">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <input type="number" class="quantity-input" value="1" min="1" max="10" aria-label="Кількість товару">
+                                    <button class="quantity-btn plus" type="button" aria-label="Збільшити кількість" data-action="increase">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="item-price">
+                                <div class="current-price">1,299 ₴</div>
+                            </div>
+
+                            <div class="item-total">
+                                <div class="total-price">1,299 ₴</div>
+                            </div>
+
+                            <div class="item-actions">
+                                <button class="action-btn wishlist-btn" type="button" aria-label="Додати в список бажань" data-action="wishlist">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button class="action-btn remove-btn" type="button" aria-label="Видалити товар" data-action="remove">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Empty Cart State -->
+                    <div class="empty-cart" id="empty-cart" style="display: none;">
+                        <div class="empty-cart-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h3>Ваш кошик порожній</h3>
+                        <p>Додайте товари до кошика, щоб продовжити покупки</p>
+                        <a href="index.html" class="btn btn-primary">Перейти до каталогу</a>
+                    </div>
+
+                    <!-- Continue Shopping -->
+                    <div class="continue-shopping">
+                        <a href="{%url 'main:view_main_page'%}" class="continue-link">
+                            <i class="fas fa-arrow-left"></i>
+                            Продовжити покупки
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Cart Summary -->
+                <div class="cart-summary-section">
+                    <div class="cart-summary">
+                        <h3>Разом до сплати</h3>
+
+                        <div class="summary-row">
+                            <span>Товари (2 шт.):</span>
+                            <span class="subtotal">3,798 ₴</span>
+                        </div>
+
+                        <div class="summary-row">
+                            <span>Знижка:</span>
+                            <span class="discount-amount">-700 ₴</span>
+                        </div>
+
+                        <div class="summary-row">
+                            <span>Доставка:</span>
+                            <span class="delivery-cost free">Безкоштовно</span>
+                        </div>
+
+                        <div class="summary-divider"></div>
+
+                        <div class="summary-row total">
+                            <span>До сплати:</span>
+                            <span class="total-amount">3,798 ₴</span>
+                        </div>
+
+                        <div class="savings-info">
+                            <i class="fas fa-piggy-bank"></i>
+                            <span>Ви економите <strong>700 ₴</strong></span>
+                        </div>
+
+                        <!-- Promo Code -->
+                        <div class="promo-code-section">
+                            <h4>Промокод</h4>
+                            <div class="promo-input-group">
+                                <input type="text" class="promo-input" placeholder="Введіть промокод" aria-label="Промокод">
+                                <button class="promo-btn" type="button">Застосувати</button>
+                            </div>
+                            <div class="promo-message" id="promo-message"></div>
+                        </div>
+
+                        <!-- Delivery Options -->
+                        <div class="delivery-options">
+                            <h4>Спосіб доставки</h4>
+                            <div class="delivery-option">
+                                <input type="radio" id="delivery-courier" name="delivery" value="courier" checked>
+                                <label for="delivery-courier">
+                                    <div class="option-info">
+                                        <div class="option-title">
+                                            <i class="fas fa-truck"></i>
+                                            Кур'єрська доставка
+                                        </div>
+                                        <div class="option-details">1-2 дні, безкоштовно від 1000 ₴</div>
+                                    </div>
+                                    <div class="option-price">Безкоштовно</div>
+                                </label>
+                            </div>
+
+                            <div class="delivery-option">
+                                <input type="radio" id="delivery-nova" name="delivery" value="nova">
+                                <label for="delivery-nova">
+                                    <div class="option-info">
+                                        <div class="option-title">
+                                            <i class="fas fa-store"></i>
+                                            Нова Пошта
+                                        </div>
+                                        <div class="option-details">1-3 дні, у відділення</div>
+                                    </div>
+                                    <div class="option-price">від 80 ₴</div>
+                                </label>
+                            </div>
+
+                            <div class="delivery-option">
+                                <input type="radio" id="delivery-ukr" name="delivery" value="ukrposhta">
+                                <label for="delivery-ukr">
+                                    <div class="option-info">
+                                        <div class="option-title">
+                                            <i class="fas fa-shipping-fast"></i>
+                                            УкрПошта
+                                        </div>
+                                        <div class="option-details">2-5 днів, у відділення</div>
+                                    </div>
+                                    <div class="option-price">від 60 ₴</div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Payment Methods -->
+                        <div class="payment-methods">
+                            <h4>Спосіб оплати</h4>
+                            <div class="payment-icons">
+                                <div class="payment-icon" title="Банківська картка">
+                                    <i class="fas fa-credit-card"></i>
+                                </div>
+                                <div class="payment-icon" title="Готівка при отриманні">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                </div>
+                                <div class="payment-icon" title="Apple Pay">
+                                    <i class="fab fa-apple-pay"></i>
+                                </div>
+                                <div class="payment-icon" title="Google Pay">
+                                    <i class="fab fa-google-pay"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Checkout Button -->
+                        <button class="checkout-btn" type="button" id="checkout-btn">
+                            <i class="fas fa-lock"></i>
+                            Оформити замовлення
+                        </button>
+
+                        <!-- Security Info -->
+                        <div class="security-info">
+                            <div class="security-item">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Безпечна оплата</span>
+                            </div>
+                            <div class="security-item">
+                                <i class="fas fa-undo"></i>
+                                <span>30 днів на повернення</span>
+                            </div>
+                            <div class="security-item">
+                                <i class="fas fa-award"></i>
+                                <span>2 роки гарантії</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recommended Products -->
+                    <div class="recommended-products">
+                        <h4>Рекомендуємо додати</h4>
+                        <div class="recommended-item">
+                            <img src="https://via.placeholder.com/80x80/F3D3B4/1E1B17?text=Лампа" alt="LED настільна лампа" width="80" height="80">
+                            <div class="recommended-info">
+                                <h5>LED настільна лампа</h5>
+                                <div class="recommended-price">1,599 ₴</div>
+                            </div>
+                            <button class="add-recommended-btn" type="button" aria-label="Додати до кошика">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+
+                        <div class="recommended-item">
+                            <img src="https://via.placeholder.com/80x80/F3D3B4/1E1B17?text=Органайзер" alt="Органайзер для столу" width="80" height="80">
+                            <div class="recommended-info">
+                                <h5>Органайзер для столу</h5>
+                                <div class="recommended-price">599 ₴</div>
+                            </div>
+                            <button class="add-recommended-btn" type="button" aria-label="Додати до кошика">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recently Viewed -->
+            <section class="recently-viewed">
+                <h3>Нещодавно переглянуті</h3>
+                <div class="products-slider">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://via.placeholder.com/200x200/F3D3B4/1E1B17?text=Підставка+монітор" alt="Підставка для монітора" width="200" height="200">
+                        </div>
+                        <div class="product-info">
+                            <h4>Підставка для монітора</h4>
+                            <div class="product-price">899 ₴</div>
+                            <button class="btn btn-outline btn-small">Переглянути</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://via.placeholder.com/200x200/F3D3B4/1E1B17?text=Килимок+миша" alt="Ергономічний килимок для миші" width="200" height="200">
+                        </div>
+                        <div class="product-info">
+                            <h4>Ергономічний килимок для миші</h4>
+                            <div class="product-price">299 ₴</div>
+                            <button class="btn btn-outline btn-small">Переглянути</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="https://via.placeholder.com/200x200/F3D3B4/1E1B17?text=Тримач+телефон" alt="Тримач для телефону" width="200" height="200">
+                        </div>
+                        <div class="product-info">
+                            <h4>Тримач для телефону</h4>
+                            <div class="product-price">399 ₴</div>
+                            <button class="btn btn-outline btn-small">Переглянути</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+{%endblock%}

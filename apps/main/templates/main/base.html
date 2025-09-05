@@ -1,0 +1,362 @@
+{%load static%}
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary Meta Tags -->
+    <title>{% block title %}{% endblock title %}</title>
+    <meta name="title" content="ERGONESTO - Преміальна підставка для ніг | Ергономічні рішення для офісу">
+    <meta name="description" content="Підвищте комфорт та продуктивність у офісі з преміальною підставкою для ніг ERGONESTO. Ергономічний дизайн, 5 рівнів висоти, 2 роки гарантії. Безкоштовна доставка по Україні.">
+    <meta name="keywords" content="підставка для ніг, ергономіка, офісні меблі, комфорт, здоров'я, ERGONESTO, Україна">
+    <meta name="author" content="ERGONESTO">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://ergonesto.ua/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ergonesto.ua/">
+    <meta property="og:title" content="ERGONESTO - Преміальна підставка для ніг | Ергономічні рішення для офісу">
+    <meta property="og:description" content="Підвищте комфорт та продуктивність у офісі з преміальною підставкою для ніг ERGONESTO. Ергономічний дизайн, 5 рівнів висоти, 2 роки гарантії.">
+    <meta property="og:image" content="https://ergonesto.ua/images/ergonesto-og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="uk_UA">
+    <meta property="og:site_name" content="ERGONESTO">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://ergonesto.ua/">
+    <meta property="twitter:title" content="ERGONESTO - Преміальна підставка для ніг">
+    <meta property="twitter:description" content="Підвищте комфорт та продуктивність у офісі з преміальною підставкою для ніг ERGONESTO.">
+    <meta property="twitter:image" content="https://ergonesto.ua/images/ergonesto-og-image.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="images/ergonesto-logo.png" as="image" type="image/png">
+    <link rel="preload" href="https://via.placeholder.com/500x400/F3D3B4/1E1B17?text=ERGONESTO+Підставка" as="image">
+    <link type="text/css" href="{% static 'main/css/main.css' %}" rel="stylesheet">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    {%block link%}{%endblock link%}
+
+    <!-- Security Headers (would be set by server, but included as meta for reference) -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline';">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": "ERGONESTO Ергономічна підставка для ніг",
+      "image": [
+        "https://ergonesto.ua/images/ergonesto-product-1.jpg",
+        "https://ergonesto.ua/images/ergonesto-product-2.jpg",
+        "https://ergonesto.ua/images/ergonesto-product-3.jpg"
+      ],
+      "description": "Преміальна ергономічна підставка для ніг з регульованою висотою. 5 рівнів налаштування, натуральне дерево, м'яка подушка. Ідеально для офісних працівників.",
+      "sku": "ERG-FOOT-001",
+      "mpn": "ERGONESTO-001",
+      "brand": {
+        "@type": "Brand",
+        "name": "ERGONESTO"
+      },
+      "manufacturer": {
+        "@type": "Organization",
+        "name": "ERGONESTO",
+        "url": "https://ergonesto.ua"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://ergonesto.ua/",
+        "priceCurrency": "UAH",
+        "price": "2499",
+        "priceValidUntil": "2024-12-31",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "ERGONESTO"
+        },
+        "shippingDetails": {
+          "@type": "OfferShippingDetails",
+          "shippingRate": {
+            "@type": "MonetaryAmount",
+            "value": "0",
+            "currency": "UAH"
+          },
+          "deliveryTime": {
+            "@type": "ShippingDeliveryTime",
+            "handlingTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 1,
+              "maxValue": 3,
+              "unitCode": "DAY"
+            }
+          }
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "2500"
+      },
+      "review": [
+        {
+          "@type": "Review",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "author": {
+            "@type": "Person",
+            "name": "Олександр К."
+          },
+          "reviewBody": "Відмінна якість, дуже зручна у використанні. Рекомендую!"
+        }
+      ],
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "Розміри",
+          "value": "45 x 35 x 10-20 см"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Вага",
+          "value": "2.5 кг"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Матеріал",
+          "value": "Натуральне дерево + м'яка подушка"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Максимальне навантаження",
+          "value": "100 кг"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Рівні регулювання",
+          "value": "5"
+        }
+      ],
+      "category": "Офісні меблі",
+      "warranty": "P2Y"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "ERGONESTO",
+      "url": "https://ergonesto.ua",
+      "logo": "https://ergonesto.ua/images/ergonesto-logo.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+380-12-345-67-89",
+        "contactType": "customer service",
+        "availableLanguage": "Ukrainian"
+      },
+      "sameAs": [
+        "https://www.facebook.com/ergonesto",
+        "https://www.instagram.com/ergonesto"
+      ]
+    }
+    </script>
+</head>
+<body>
+
+    <!-- Header -->
+       <header class="header" role="banner">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="{%url 'main:view_main_page'%}"><img src="{% static 'main/images/logo.png' %}" alt="ERGONESTO - логотип компанії" class="logo-img" width="100" height="100" loading="eager" decoding="sync" fetchpriority="high"></a>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="nav" role="navigation" aria-label="Основна навігація">
+                    <a href="#configurator" class="nav-link">Configurator</a>
+                    <a href="#collections" class="nav-link">Collections</a>
+                    <a href="#materials" class="nav-link">Materials</a>
+                    <a href="#modules" class="nav-link">Modules</a>
+                    <a href="{%url 'main:catalog'%}" class="nav-link">Shop</a>
+                </nav>
+
+                <!-- Header Actions -->
+                <div class="header-actions">
+                    <button class="header-action-btn search-btn" type="button" aria-label="Пошук товарів" data-action="search">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </button>
+
+                    <a href="{%url 'cart:cart_detail'%}">
+                        <button class="header-action-btn cart-btn" type="button" aria-label="Кошик покупок" data-action="cart">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 22C9.55228 22 10 21.5523 10 21C10 20.4477 9.55228 20 9 20C8.44772 20 8 20.4477 8 21C8 21.5523 8.44772 22 9 22Z"></path>
+                                <path d="M20 22C20.5523 22 21 21.5523 21 21C21 20.4477 20.5523 20 20 20C19.4477 20 19 20.4477 19 21C19 21.5523 19.4477 22 20 22Z"></path>
+                                <path d="M1 1H5L7.68 14.39C7.77144 14.8504 8.02191 15.264 8.38755 15.5583C8.75318 15.8526 9.2107 16.009 9.68 16H19.4C19.8693 16.009 20.3268 15.8526 20.6925 15.5583C21.0581 15.264 21.3086 14.8504 21.4 14.39L23 6H6"></path>
+                            </svg>
+                            <span class="cart-count" id="cart-count">3</span>
+                        </button>
+                    </a>
+
+                    <button class="header-action-btn profile-btn" type="button" aria-label="Профіль користувача" data-action="profile">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </button>
+
+                    <!-- Language Switcher -->
+                    <div class="language-switcher">
+                        <button class="header-action-btn language-btn" type="button" aria-label="Змінити мову" aria-expanded="false" aria-haspopup="true" data-action="language">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="2" y1="12" x2="22" y2="12"></line>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                            </svg>
+                            <span class="language-code">UA</span>
+                        </button>
+
+                        <div class="language-dropdown" id="language-dropdown" aria-hidden="true" role="menu">
+                            <div class="language-option active" data-lang="uk" role="menuitem" tabindex="0">
+                                <img src="{%static 'main/images/ua.png'%}" alt="Українська" class="flag-icon" width="20" height="15">
+                                <span class="language-name">Українська</span>
+                                <span class="language-native">UA</span>
+                            </div>
+                            <div class="language-option" data-lang="en" role="menuitem" tabindex="0">
+                                <img src="{%static 'main/images/us.png'%}" alt="English" class="flag-icon" width="20" height="15">
+                                <span class="language-name">English</span>
+                                <span class="language-native">EN</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <button class="mobile-menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Відкрити меню навігації" data-mobile-menu-toggle>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+
+                <!-- Mobile menu -->
+                <div class="mobile-menu" id="mobile-menu" aria-hidden="true" role="dialog" aria-labelledby="mobile-menu-title">
+                    <h2 id="mobile-menu-title" class="sr-only">Mobile menu</h2>
+                    <nav role="navigation" aria-label="Мобільна навігація">
+                        <a href="#configurator" class="mobile-nav-link">Configurator</a>
+                        <a href="#collections" class="mobile-nav-link">Collections</a>
+                        <a href="#materials" class="mobile-nav-link">Materials</a>
+                        <a href="#modules" class="mobile-nav-link">Modules</a>
+                        <a href="{%url 'main:catalog'%}" class="mobile-nav-link">Shop</a>
+                    </nav>
+
+                    <!-- Mobile Actions -->
+                    <div class="mobile-actions">
+                        <button class="mobile-action-btn" type="button" data-action="search">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.35-4.35"></path>
+                            </svg>
+                            <span>Search</span>
+                        </button>
+                        <a href="{%url 'cart:cart_detail'%}">
+                            <button class="mobile-action-btn" type="button" data-action="cart">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 22C9.55228 22 10 21.5523 10 21C10 20.4477 9.55228 20 9 20C8.44772 20 8 20.4477 8 21C8 21.5523 8.44772 22 9 22Z"></path>
+                                    <path d="M20 22C20.5523 22 21 21.5523 21 21C21 20.4477 20.5523 20 20 20C19.4477 20 19 20.4477 19 21C19 21.5523 19.4477 22 20 22Z"></path>
+                                    <path d="M1 1H5L7.68 14.39C7.77144 14.8504 8.02191 15.264 8.38755 15.5583C8.75318 15.8526 9.2107 16.009 9.68 16H19.4C19.8693 16.009 20.3268 15.8526 20.6925 15.5583C21.0581 15.264 21.3086 14.8504 21.4 14.39L23 6H6"></path>
+                                </svg>
+                                <span>Cart</span>
+                                <span class="mobile-cart-count">3</span>
+                            </button>
+                        </a>
+                        <button class="mobile-action-btn" type="button" data-action="profile">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            <span>Profile</span>
+                        </button>
+                        <button class="mobile-action-btn language-mobile-btn" type="button" data-action="language">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="2" y1="12" x2="22" y2="12"></line>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                            </svg>
+                            <span>Language</span>
+                            <span class="current-language">UA</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    {%block content%}{%endblock content%}
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="images/ergonesto-logo.png"
+                         alt="ERGONESTO - логотип компанії"
+                         class="footer-logo"
+                         width="100"
+                         height="100"
+                         loading="lazy"
+                         decoding="async">
+                    <p class="footer-description">Преміальні ергономічні рішення для вашого офісу</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4 class="footer-title">Продукт</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" class="footer-link">Відгуки</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4 class="footer-title">Підтримка</h4>
+                    <ul class="footer-links">
+                        <li><a href="{%url 'main:view_contact_page'%}" class="footer-link">Контакти</a></li>
+                        <li><a href="#" class="footer-link">Доставка та повернення</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4 class="footer-title">Компанія</h4>
+                    <ul class="footer-links">
+                        <li><a href="#story-title" class="footer-link">Про нас</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 ERGONESTO. Всі права захищені.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="{% static 'main/js/main.js' %}"></script>
+</body>
+</html>
