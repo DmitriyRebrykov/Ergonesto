@@ -5,72 +5,74 @@
 
 {%block link%}<link type="text/css" href="{% static 'main/css/catalog.css' %}" rel="stylesheet">{%endblock link%}
 {%block content%}
-    <nav class="breadcrumbs">
+    <nav class="breadcrumbs" aria-label="Навігаційна стежка">
         <div class="container">
-            <ul class="breadcrumb-list">
+            <ol class="breadcrumb-list">
                 <li class="breadcrumb-item">
                     <a href="index.html" class="breadcrumb-link">Головна</a>
                 </li>
-                <li class="breadcrumb-item active">Каталог</li>
-            </ul>
+                <li class="breadcrumb-item active" aria-current="page">
+                    Каталог товарів
+                </li>
+            </ol>
         </div>
     </nav>
 
-    <!-- Page Header -->
-    <section class="page-header">
-        <div class="container">
-            <h1 class="page-title">Каталог товарів</h1>
-            <p class="page-description">
-                Оберіть ідеальні ергономічні рішення для вашого робочого місця.
-                Якість, комфорт та здоров'я в кожному продукті.
-            </p>
-        </div>
-    </section>
-
     <!-- Main Content -->
-    <main class="main">
+    <main class="catalog-page">
         <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1 class="page-title">Каталог товарів</h1>
+                <p class="page-description">Ергономічні рішення для комфортної роботи в офісі</p>
+            </div>
+
             <!-- Catalog Controls -->
             <div class="catalog-controls">
-                <button class="mobile-filter-toggle" id="mobileFilterToggle">
+                <!-- Mobile Filter Toggle -->
+                <button class="mobile-filter-toggle" type="button" aria-label="Відкрити фільтри" data-filter-toggle>
                     <i class="fas fa-filter"></i>
                     <span>Фільтри</span>
-                    <span class="filter-count" id="filterCount">0</span>
+                    <span class="filter-count" id="active-filters-count">0</span>
                 </button>
 
+                <!-- View Toggle -->
                 <div class="view-toggle">
-                    <button class="view-btn active" data-view="grid">
-                        <i class="fas fa-th-large"></i>
+                    <button class="view-btn active" data-view="grid" aria-label="Сітка товарів">
+                        <i class="fas fa-th"></i>
                     </button>
-                    <button class="view-btn" data-view="list">
+                    <button class="view-btn" data-view="list" aria-label="Список товарів">
                         <i class="fas fa-list"></i>
                     </button>
                 </div>
 
+                <!-- Sort Controls -->
                 <div class="sort-controls">
-                    <label class="sort-label">Сортувати за:</label>
-                    <select class="sort-select" id="sortSelect">
-                        <option value="popularity">Популярністю</option>
-                        <option value="price-low">Ціною: від низької</option>
-                        <option value="price-high">Ціною: від високої</option>
-                        <option value="rating">Рейтингом</option>
-                        <option value="newest">Новинками</option>
-                        <option value="name">Назвою</option>
+                    <label for="sort-select" class="sort-label">Сортувати:</label>
+                    <select id="sort-select" class="sort-select">
+                        <option value="popularity">За популярністю</option>
+                        <option value="price-asc">Ціна: від низької до високої</option>
+                        <option value="price-desc">Ціна: від високої до низької</option>
+                        <option value="name-asc">Назва: А-Я</option>
+                        <option value="name-desc">Назва: Я-А</option>
+                        <option value="rating">За рейтингом</option>
+                        <option value="newest">Найновіші</option>
                     </select>
                 </div>
 
+                <!-- Results Info -->
                 <div class="results-info">
-                    <span class="results-count">Знайдено <strong>24</strong> товари</span>
+                    <span class="results-count">Знайдено: <strong id="results-count">24</strong> товари</span>
                 </div>
             </div>
 
             <!-- Catalog Layout -->
             <div class="catalog-layout">
-                <!-- Sidebar -->
-                <aside class="catalog-sidebar" id="catalogSidebar">
+                <!-- Sidebar with Filters -->
+                <aside class="catalog-sidebar" id="catalog-sidebar" aria-label="Фільтри товарів">
                     <div class="sidebar-header">
-                        <h3 class="sidebar-title">Фільтри</h3>
-                        <button class="clear-filters-btn" id="clearFilters">
+                        <h2 class="sidebar-title">Фільтри</h2>
+                        <button class="clear-filters-btn" type="button" id="clear-filters">
                             <i class="fas fa-times"></i>
                             Очистити все
                         </button>
@@ -78,10 +80,10 @@
 
                     <!-- Search Filter -->
                     <div class="filter-group">
-                        <h4 class="filter-title">Пошук</h4>
+                        <h3 class="filter-title">Пошук</h3>
                         <div class="search-filter">
-                            <input type="text" class="search-input" placeholder="Пошук товарів..." id="searchInput">
-                            <button class="search-btn">
+                            <input type="text" id="search-input" class="search-input" placeholder="Пошук товарів...">
+                            <button class="search-btn" type="button" aria-label="Пошук">
                                 <i class="fas fa-search"></i>
                             </button>
                         </div>
@@ -89,85 +91,122 @@
 
                     <!-- Category Filter -->
                     <div class="filter-group">
-                        <h4 class="filter-title">Категорії</h4>
+                        <h3 class="filter-title">Категорії</h3>
                         <div class="filter-options">
                             <label class="filter-option">
-                                <input type="checkbox" name="category" value="chairs">
+                                <input type="checkbox" name="category" value="footrests" data-filter="category">
                                 <span class="checkmark"></span>
-                                <span class="option-text">Крісла</span>
-                                <span class="option-count">12</span>
+                                <span class="option-text">Підставки для ніг</span>
+                                <span class="option-count">(8)</span>
                             </label>
                             <label class="filter-option">
-                                <input type="checkbox" name="category" value="desks">
+                                <input type="checkbox" name="category" value="back-support" data-filter="category">
                                 <span class="checkmark"></span>
-                                <span class="option-text">Столи</span>
-                                <span class="option-count">8</span>
+                                <span class="option-text">Підтримка спини</span>
+                                <span class="option-count">(6)</span>
                             </label>
                             <label class="filter-option">
-                                <input type="checkbox" name="category" value="accessories">
+                                <input type="checkbox" name="category" value="organizers" data-filter="category">
+                                <span class="checkmark"></span>
+                                <span class="option-text">Органайзери</span>
+                                <span class="option-count">(5)</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="category" value="lighting" data-filter="category">
+                                <span class="checkmark"></span>
+                                <span class="option-text">Освітлення</span>
+                                <span class="option-count">(3)</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="category" value="accessories" data-filter="category">
                                 <span class="checkmark"></span>
                                 <span class="option-text">Аксесуари</span>
-                                <span class="option-count">4</span>
+                                <span class="option-count">(2)</span>
                             </label>
                         </div>
                     </div>
 
                     <!-- Price Filter -->
                     <div class="filter-group">
-                        <h4 class="filter-title">Ціна</h4>
+                        <h3 class="filter-title">Ціна</h3>
                         <div class="price-filter">
                             <div class="price-range">
-                                <input type="range" class="price-slider" id="priceMin" min="0" max="50000" value="0">
-                                <input type="range" class="price-slider" id="priceMax" min="0" max="50000" value="50000">
+                                <input type="range" id="price-min" class="price-slider" min="0" max="5000" value="0" data-filter="price-min">
+                                <input type="range" id="price-max" class="price-slider" min="0" max="5000" value="5000" data-filter="price-max">
                             </div>
                             <div class="price-inputs">
                                 <div class="price-input-group">
-                                    <label>Від</label>
-                                    <input type="number" class="price-input" id="priceMinInput" value="0">
+                                    <label for="price-from">Від:</label>
+                                    <input type="number" id="price-from" class="price-input" min="0" max="5000" value="0">
                                     <span class="currency">₴</span>
                                 </div>
                                 <div class="price-input-group">
-                                    <label>До</label>
-                                    <input type="number" class="price-input" id="priceMaxInput" value="50000">
+                                    <label for="price-to">До:</label>
+                                    <input type="number" id="price-to" class="price-input" min="0" max="5000" value="5000">
                                     <span class="currency">₴</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    <!-- Material Filter -->
+                    <div class="filter-group">
+                        <h3 class="filter-title">Матеріал</h3>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="checkbox" name="material" value="wood" data-filter="material">
+                                <span class="checkmark"></span>
+                                <span class="option-text">Дерево</span>
+                                <span class="option-count">(12)</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="material" value="metal" data-filter="material">
+                                <span class="checkmark"></span>
+                                <span class="option-text">Метал</span>
+                                <span class="option-count">(8)</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="material" value="plastic" data-filter="material">
+                                <span class="checkmark"></span>
+                                <span class="option-text">Пластик</span>
+                                <span class="option-count">(4)</span>
+                            </label>
+                        </div>
+                    </div>
+
                     <!-- Color Filter -->
                     <div class="filter-group">
-                        <h4 class="filter-title">Колір</h4>
+                        <h3 class="filter-title">Колір</h3>
                         <div class="color-filter">
-                            <label class="color-option">
-                                <input type="checkbox" name="color" value="black">
-                                <span class="color-swatch" style="background-color: #000000;"></span>
-                            </label>
-                            <label class="color-option">
-                                <input type="checkbox" name="color" value="white">
-                                <span class="color-swatch" style="background-color: #ffffff;"></span>
-                            </label>
-                            <label class="color-option">
-                                <input type="checkbox" name="color" value="gray">
-                                <span class="color-swatch" style="background-color: #808080;"></span>
-                            </label>
-                            <label class="color-option">
-                                <input type="checkbox" name="color" value="brown">
+                            <label class="color-option" title="Коричневий">
+                                <input type="checkbox" name="color" value="brown" data-filter="color">
                                 <span class="color-swatch" style="background-color: #8B4513;"></span>
                             </label>
-                            <label class="color-option">
-                                <input type="checkbox" name="color" value="blue">
-                                <span class="color-swatch" style="background-color: #0066CC;"></span>
+                            <label class="color-option" title="Чорний">
+                                <input type="checkbox" name="color" value="black" data-filter="color">
+                                <span class="color-swatch" style="background-color: #2C2C2C;"></span>
+                            </label>
+                            <label class="color-option" title="Білий">
+                                <input type="checkbox" name="color" value="white" data-filter="color">
+                                <span class="color-swatch" style="background-color: #FFFFFF;"></span>
+                            </label>
+                            <label class="color-option" title="Сірий">
+                                <input type="checkbox" name="color" value="gray" data-filter="color">
+                                <span class="color-swatch" style="background-color: #808080;"></span>
+                            </label>
+                            <label class="color-option" title="Бежевий">
+                                <input type="checkbox" name="color" value="beige" data-filter="color">
+                                <span class="color-swatch" style="background-color: #F5F5DC;"></span>
                             </label>
                         </div>
                     </div>
 
                     <!-- Rating Filter -->
                     <div class="filter-group">
-                        <h4 class="filter-title">Рейтинг</h4>
+                        <h3 class="filter-title">Рейтинг</h3>
                         <div class="rating-filter">
                             <label class="rating-option">
-                                <input type="radio" name="rating" value="5">
+                                <input type="radio" name="rating" value="5" data-filter="rating">
                                 <div class="rating-stars">
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
@@ -178,7 +217,7 @@
                                 <span class="rating-text">5 зірок</span>
                             </label>
                             <label class="rating-option">
-                                <input type="radio" name="rating" value="4">
+                                <input type="radio" name="rating" value="4" data-filter="rating">
                                 <div class="rating-stars">
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
@@ -186,10 +225,10 @@
                                     <i class="fas fa-star"></i>
                                     <i class="far fa-star"></i>
                                 </div>
-                                <span class="rating-text">4+ зірки</span>
+                                <span class="rating-text">4+ зірок</span>
                             </label>
                             <label class="rating-option">
-                                <input type="radio" name="rating" value="3">
+                                <input type="radio" name="rating" value="3" data-filter="rating">
                                 <div class="rating-stars">
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
@@ -197,7 +236,51 @@
                                     <i class="far fa-star"></i>
                                     <i class="far fa-star"></i>
                                 </div>
-                                <span class="rating-text">3+ зірки</span>
+                                <span class="rating-text">3+ зірок</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Availability Filter -->
+                    <div class="filter-group">
+                        <h3 class="filter-title">Наявність</h3>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="checkbox" name="availability" value="in-stock" data-filter="availability">
+                                <span class="checkmark"></span>
+                                <span class="option-text">В наявності</span>
+                                <span class="option-count">(20)</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="availability" value="pre-order" data-filter="availability">
+                                <span class="checkmark"></span>
+                                <span class="option-text">Під замовлення</span>
+                                <span class="option-count">(4)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Features Filter -->
+                    <div class="filter-group">
+                        <h3 class="filter-title">Особливості</h3>
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="checkbox" name="features" value="adjustable" data-filter="features">
+                                <span class="checkmark"></span>
+                                <span class="option-text">Регульований</span>
+                                <span class="option-count">(15)</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="features" value="eco-friendly" data-filter="features">
+                                <span class="checkmark"></span>
+                                <span class="option-text">Екологічний</span>
+                                <span class="option-count">(10)</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="features" value="warranty" data-filter="features">
+                                <span class="checkmark"></span>
+                                <span class="option-text">Гарантія 2+ роки</span>
+                                <span class="option-count">(18)</span>
                             </label>
                         </div>
                     </div>
@@ -205,787 +288,21 @@
 
                 <!-- Products Grid -->
                 <div class="catalog-content">
+                    <!-- Active Filters -->
+                    <div class="active-filters" id="active-filters" style="display: none;">
+                        <div class="active-filters-header">
+                            <span class="active-filters-title">Активні фільтри:</span>
+                            <button class="clear-all-filters" type="button">Очистити все</button>
+                        </div>
+                        <div class="active-filters-list" id="active-filters-list">
+                            <!-- Active filter tags will be inserted here -->
+                        </div>
+                    </div>
+
                     <!-- Products Container -->
                     <div class="products-container" id="products-container">
-                        <!-- Active Filters -->
-                        <div class="active-filters" id="active-filters" style="display: none;">
-                            <div class="active-filters-header">
-                                <span class="active-filters-title">Активні фільтри:</span>
-                                <button class="clear-all-filters" type="button">Очистити все</button>
-                            </div>
-                            <div class="active-filters-list" id="active-filters-list">
-                                <!-- Active filter tags will be inserted here -->
-                            </div>
-                        </div>
-
-                        <!-- Products Grid -->
                         <div class="products-grid" id="products-grid">
-                            <!-- Product Card 1 -->
-                            <div class="product-card" data-product-id="1">
-                                <div class="product-image">
-                                    <img src="" alt="ERGONESTO Ергономічна підставка для ніг" loading="lazy">
-                                    <div class="product-badges">
-                                        <span class="product-badge badge-bestseller">Хіт продажів</span>
-                                        <span class="product-badge badge-sale">-22%</span>
-                                    </div>
-                                    <div class="product-actions">
-                                        <button class="product-action-btn wishlist-btn" title="Додати в список бажань" data-action="wishlist">
-                                            <i class="far fa-heart"></i>
-                                        </button>
-                                        <button class="product-action-btn compare-btn" title="Порівняти" data-action="compare">
-                                            <i class="fas fa-balance-scale"></i>
-                                        </button>
-                                        <button class="product-action-btn quick-view-btn" title="Швидкий перегляд" data-action="quick-view">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="product-info">
-                                    <div class="product-details">
-                                        <div class="product-category">ПІДСТАВКИ ДЛЯ НІГ</div>
-                                        <h3 class="product-title">
-                                            <a href="product.html?id=1">ERGONESTO Ергономічна підставка для ніг</a>
-                                        </h3>
-                                        <div class="product-rating">
-                                            <div class="product-stars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <span class="product-rating-text">4.9 (2500)</span>
-                                        </div>
-                                        <div class="product-features">
-                                            <div class="product-features-list">
-                                                <span class="product-feature">Регульований</span>
-                                                <span class="product-feature">Екологічний</span>
-                                                <span class="product-feature">Гарантія</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-availability in-stock">
-                                            <i class="fas fa-check"></i>
-                                            В наявності
-                                            <span class="stock-count">(47 шт.)</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-price-actions">
-                                        <div class="product-price">
-                                            <span class="current-price">2 499 ₴</span>
-                                            <span class="old-price">3 199 ₴</span>
-                                            <span class="discount-percent">-22%</span>
-                                        </div>
-                                        <div class="product-card-actions">
-                                            <button class="add-to-cart-btn" data-action="add-to-cart">
-                                                <i class="fas fa-shopping-cart"></i>
-                                                В кошик
-                                            </button>
-                                            <button class="quick-view-btn" data-action="quick-view" title="Швидкий перегляд">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Product Card 2 -->
-                            <div class="product-card" data-product-id="2">
-                                <div class="product-image">
-                                    <img src="{%static 'main/images/img.png'%}" alt="Ергономічна подушка для спини Premium" loading="lazy">
-                                    <div class="product-badges">
-                                        <span class="product-badge badge-new">Новинка</span>
-                                    </div>
-                                    <div class="product-actions">
-                                        <button class="product-action-btn wishlist-btn" title="Додати в список бажань" data-action="wishlist">
-                                            <i class="far fa-heart"></i>
-                                        </button>
-                                        <button class="product-action-btn compare-btn" title="Порівняти" data-action="compare">
-                                            <i class="fas fa-balance-scale"></i>
-                                        </button>
-                                        <button class="product-action-btn quick-view-btn" title="Швидкий перегляд" data-action="quick-view">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="product-info">
-                                    <div class="product-details">
-                                        <div class="product-category">ПІДТРИМКА СПИНИ</div>
-                                        <h3 class="product-title">
-                                            <a href="product.html?id=2">Ергономічна подушка для спини Premium</a>
-                                        </h3>
-                                        <div class="product-rating">
-                                            <div class="product-stars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <span class="product-rating-text">4.7 (1850)</span>
-                                        </div>
-                                        <div class="product-features">
-                                            <div class="product-features-list">
-                                                <span class="product-feature">Екологічний</span>
-                                                <span class="product-feature">Гарантія</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-availability in-stock">
-                                            <i class="fas fa-check"></i>
-                                            В наявності
-                                            <span class="stock-count">(23 шт.)</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-price-actions">
-                                        <div class="product-price">
-                                            <span class="current-price">1 299 ₴</span>
-                                        </div>
-                                        <div class="product-card-actions">
-                                            <button class="add-to-cart-btn" data-action="add-to-cart">
-                                                <i class="fas fa-shopping-cart"></i>
-                                                В кошик
-                                            </button>
-                                            <button class="quick-view-btn" data-action="quick-view" title="Швидкий перегляд">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Product Card 3 -->
-                            <div class="product-card" data-product-id="3">
-                                <div class="product-image">
-                                    <img src="/placeholder.svg?height=300&width=300&text=Підставка+монітор" alt="Підставка для монітора з органайзером" loading="lazy">
-                                    <div class="product-badges">
-                                        <span class="product-badge badge-sale">-25%</span>
-                                    </div>
-                                    <div class="product-actions">
-                                        <button class="product-action-btn wishlist-btn" title="Додати в список бажань" data-action="wishlist">
-                                            <i class="far fa-heart"></i>
-                                        </button>
-                                        <button class="product-action-btn compare-btn" title="Порівняти" data-action="compare">
-                                            <i class="fas fa-balance-scale"></i>
-                                        </button>
-                                        <button class="product-action-btn quick-view-btn" title="Швидкий перегляд" data-action="quick-view">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="product-info">
-                                    <div class="product-details">
-                                        <div class="product-category">ОРГАНАЙЗЕРИ</div>
-                                        <h3 class="product-title">
-                                            <a href="product.html?id=3">Підставка для монітора з органайзером</a>
-                                        </h3>
-                                        <div class="product-rating">
-                                            <div class="product-stars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <span class="product-rating-text">4.6 (1200)</span>
-                                        </div>
-                                        <div class="product-features">
-                                            <div class="product-features-list">
-                                                <span class="product-feature">Регульований</span>
-                                                <span class="product-feature">Гарантія</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-availability in-stock">
-                                            <i class="fas fa-check"></i>
-                                            В наявності
-                                            <span class="stock-count">(15 шт.)</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-price-actions">
-                                        <div class="product-price">
-                                            <span class="current-price">899 ₴</span>
-                                            <span class="old-price">1 199 ₴</span>
-                                            <span class="discount-percent">-25%</span>
-                                        </div>
-                                        <div class="product-card-actions">
-                                            <button class="add-to-cart-btn" data-action="add-to-cart">
-                                                <i class="fas fa-shopping-cart"></i>
-                                                В кошик
-                                            </button>
-                                            <button class="quick-view-btn" data-action="quick-view" title="Швидкий перегляд">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Product Card 4 -->
-                            <div class="product-card" data-product-id="4">
-                                <div class="product-image">
-                                    <img src="/placeholder.svg?height=300&width=300&text=LED+лампа" alt="LED настільна лампа з бездротовою зарядкою" loading="lazy">
-                                    <div class="product-badges">
-                                        <span class="product-badge badge-new">Новинка</span>
-                                    </div>
-                                    <div class="product-actions">
-                                        <button class="product-action-btn wishlist-btn" title="Додати в список бажань" data-action="wishlist">
-                                            <i class="far fa-heart"></i>
-                                        </button>
-                                        <button class="product-action-btn compare-btn" title="Порівняти" data-action="compare">
-                                            <i class="fas fa-balance-scale"></i>
-                                        </button>
-                                        <button class="product-action-btn quick-view-btn" title="Швидкий перегляд" data-action="quick-view">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="product-info">
-                                    <div class="product-details">
-                                        <div class="product-category">ОСВІТЛЕННЯ</div>
-                                        <h3 class="product-title">
-                                            <a href="product.html?id=4">LED настільна лампа з бездротовою зарядкою</a>
-                                        </h3>
-                                        <div class="product-rating">
-                                            <div class="product-stars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <span class="product-rating-text">4.8 (890)</span>
-                                        </div>
-                                        <div class="product-features">
-                                            <div class="product-features-list">
-                                                <span class="product-feature">Регульований</span>
-                                                <span class="product-feature">Екологічний</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-availability in-stock">
-                                            <i class="fas fa-check"></i>
-                                            В наявності
-                                            <span class="stock-count">(8 шт.)</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-price-actions">
-                                        <div class="product-price">
-                                            <span class="current-price">1 599 ₴</span>
-                                        </div>
-                                        <div class="product-card-actions">
-                                            <button class="add-to-cart-btn" data-action="add-to-cart">
-                                                <i class="fas fa-shopping-cart"></i>
-                                                В кошик
-                                            </button>
-                                            <button class="quick-view-btn" data-action="quick-view" title="Швидкий перегляд">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Product Card 5 -->
-                            <div class="product-card" data-product-id="5">
-                                <div class="product-image">
-                                    <img src="/placeholder.svg?height=300&width=300&text=Органайзер+бамбук" alt="Органайзер для столу з бамбука" loading="lazy">
-                                    <div class="product-actions">
-                                        <button class="product-action-btn wishlist-btn" title="Додати в список бажань" data-action="wishlist">
-                                            <i class="far fa-heart"></i>
-                                        </button>
-                                        <button class="product-action-btn compare-btn" title="Порівняти" data-action="compare">
-                                            <i class="fas fa-balance-scale"></i>
-                                        </button>
-                                        <button class="product-action-btn quick-view-btn" title="Швидкий перегляд" data-action="quick-view">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="product-info">
-                                    <div class="product-details">
-                                        <div class="product-category">ОРГАНАЙЗЕРИ</div>
-                                        <h3 class="product-title">
-                                            <a href="product.html?id=5">Органайзер для столу з бамбука</a>
-                                        </h3>
-                                        <div class="product-rating">
-                                            <div class="product-stars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="far fa-star"></i>
-                                            </div>
-                                            <span class="product-rating-text">4.5 (650)</span>
-                                        </div>
-                                        <div class="product-features">
-                                            <div class="product-features-list">
-                                                <span class="product-feature">Екологічний</span>
-                                                <span class="product-feature">Гарантія</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-availability in-stock">
-                                            <i class="fas fa-check"></i>
-                                            В наявності
-                                            <span class="stock-count">(32 шт.)</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-price-actions">
-                                        <div class="product-price">
-                                            <span class="current-price">599 ₴</span>
-                                        </div>
-                                        <div class="product-card-actions">
-                                            <button class="add-to-cart-btn" data-action="add-to-cart">
-                                                <i class="fas fa-shopping-cart"></i>
-                                                В кошик
-                                            </button>
-                                            <button class="quick-view-btn" data-action="quick-view" title="Швидкий перегляд">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Product Card 6 -->
-                            <div class="product-card" data-product-id="6">
-                                <div class="product-image">
-                                    <img src="/placeholder.svg?height=300&width=300&text=Підставка+ноутбук" alt="Ергономічна підставка для ноутбука" loading="lazy">
-                                    <div class="product-actions">
-                                        <button class="product-action-btn wishlist-btn" title="Додати в список бажань" data-action="wishlist">
-                                            <i class="far fa-heart"></i>
-                                        </button>
-                                        <button class="product-action-btn compare-btn" title="Порівняти" data-action="compare">
-                                            <i class="fas fa-balance-scale"></i>
-                                        </button>
-                                        <button class="product-action-btn quick-view-btn" title="Швидкий перегляд" data-action="quick-view">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="product-info">
-                                    <div class="product-details">
-                                        <div class="product-category">АКСЕСУАРИ</div>
-                                        <h3 class="product-title">
-                                            <a href="product.html?id=6">Ергономічна підставка для ноутбука</a>
-                                        </h3>
-                                        <div class="product-rating">
-                                            <div class="product-stars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="far fa-star"></i>
-                                            </div>
-                                            <span class="product-rating-text">4.4 (420)</span>
-                                        </div>
-                                        <div class="product-features">
-                                            <div class="product-features-list">
-                                                <span class="product-feature">Регульований</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-availability in-stock">
-                                            <i class="fas fa-check"></i>
-                                            В наявності
-                                            <span class="stock-count">(19 шт.)</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-price-actions">
-                                        <div class="product-price">
-                                            <span class="current-price">799 ₴</span>
-                                            <span class="old-price">999 ₴</span>
-                                            <span class="discount-percent">-20%</span>
-                                        </div>
-                                        <div class="product-card-actions">
-                                            <button class="add-to-cart-btn" data-action="add-to-cart">
-                                                <i class="fas fa-shopping-cart"></i>
-                                                В кошик
-                                            </button>
-                                            <button class="quick-view-btn" data-action="quick-view" title="Швидкий перегляд">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Product Card 7 -->
-                            <div class="product-card" data-product-id="7">
-                                <div class="product-image">
-                                    <img src="/placeholder.svg?height=300&width=300&text=Масажна+подушка" alt="Масажна подушка для шиї" loading="lazy">
-                                    <div class="product-badges">
-                                        <span class="product-badge badge-bestseller">Хіт продажів</span>
-                                    </div>
-                                    <div class="product-actions">
-                                        <button class="product-action-btn wishlist-btn" title="Додати в список бажань" data-action="wishlist">
-                                            <i class="far fa-heart"></i>
-                                        </button>
-                                        <button class="product-action-btn compare-btn" title="Порівняти" data-action="compare">
-                                            <i class="fas fa-balance-scale"></i>
-                                        </button>
-                                        <button class="product-action-btn quick-view-btn" title="Швидкий перегляд" data-action="quick-view">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="product-info">
-                                    <div class="product-details">
-                                        <div class="product-category">ПІДТРИМКА СПИНИ</div>
-                                        <h3 class="product-title">
-                                            <a href="product.html?id=7">Масажна подушка для шиї</a>
-                                        </h3>
-                                        <div class="product-rating">
-                                            <div class="product-stars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <span class="product-rating-text">4.9 (1100)</span>
-                                        </div>
-                                        <div class="product-features">
-                                            <div class="product-features-list">
-                                                <span class="product-feature">Гарантія</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-availability pre-order">
-                                            <i class="fas fa-clock"></i>
-                                            Під замовлення
-                                        </div>
-                                    </div>
-                                    <div class="product-price-actions">
-                                        <div class="product-price">
-                                            <span class="current-price">1 899 ₴</span>
-                                        </div>
-                                        <div class="product-card-actions">
-                                            <button class="add-to-cart-btn" data-action="add-to-cart">
-                                                <i class="fas fa-shopping-cart"></i>
-                                                Замовити
-                                            </button>
-                                            <button class="quick-view-btn" data-action="quick-view" title="Швидкий перегляд">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Product Card 8 -->
-                            <div class="product-card" data-product-id="8">
-                                <div class="product-image">
-                                    <img src="/placeholder.svg?height=300&width=300&text=Підставка+підігрів" alt="Підставка для ніг з підігрівом" loading="lazy">
-                                    <div class="product-badges">
-                                        <span class="product-badge badge-new">Новинка</span>
-                                    </div>
-                                    <div class="product-actions">
-                                        <button class="product-action-btn wishlist-btn" title="Додати в список бажань" data-action="wishlist">
-                                            <i class="far fa-heart"></i>
-                                        </button>
-                                        <button class="product-action-btn compare-btn" title="Порівняти" data-action="compare">
-                                            <i class="fas fa-balance-scale"></i>
-                                        </button>
-                                        <button class="product-action-btn quick-view-btn" title="Швидкий перегляд" data-action="quick-view">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="product-info">
-                                    <div class="product-details">
-                                        <div class="product-category">ПІДСТАВКИ ДЛЯ НІГ</div>
-                                        <h3 class="product-title">
-                                            <a href="product.html?id=8">Підставка для ніг з підігрівом</a>
-                                        </h3>
-                                        <div class="product-rating">
-                                            <div class="product-stars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <span class="product-rating-text">4.7 (780)</span>
-                                        </div>
-                                        <div class="product-features">
-                                            <div class="product-features-list">
-                                                <span class="product-feature">Регульований</span>
-                                                <span class="product-feature">Гарантія</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-availability in-stock">
-                                            <i class="fas fa-check"></i>
-                                            В наявності
-                                            <span class="stock-count">(12 шт.)</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-price-actions">
-                                        <div class="product-price">
-                                            <span class="current-price">3 299 ₴</span>
-                                        </div>
-                                        <div class="product-card-actions">
-                                            <button class="add-to-cart-btn" data-action="add-to-cart">
-                                                <i class="fas fa-shopping-cart"></i>
-                                                В кошик
-                                            </button>
-                                            <button class="quick-view-btn" data-action="quick-view" title="Швидкий перегляд">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Product Card 9 -->
-                            <div class="product-card" data-product-id="9">
-                                <div class="product-image">
-                                    <img src="/placeholder.svg?height=300&width=300&text=Клавіатура+ерго" alt="Ергономічна клавіатура з підставкою" loading="lazy">
-                                    <div class="product-badges">
-                                        <span class="product-badge badge-sale">-15%</span>
-                                    </div>
-                                    <div class="product-actions">
-                                        <button class="product-action-btn wishlist-btn" title="Додати в список бажань" data-action="wishlist">
-                                            <i class="far fa-heart"></i>
-                                        </button>
-                                        <button class="product-action-btn compare-btn" title="Порівняти" data-action="compare">
-                                            <i class="fas fa-balance-scale"></i>
-                                        </button>
-                                        <button class="product-action-btn quick-view-btn" title="Швидкий перегляд" data-action="quick-view">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="product-info">
-                                    <div class="product-details">
-                                        <div class="product-category">АКСЕСУАРИ</div>
-                                        <h3 class="product-title">
-                                            <a href="product.html?id=9">Ергономічна клавіатура з підставкою</a>
-                                        </h3>
-                                        <div class="product-rating">
-                                            <div class="product-stars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <span class="product-rating-text">4.6 (560)</span>
-                                        </div>
-                                        <div class="product-features">
-                                            <div class="product-features-list">
-                                                <span class="product-feature">Регульований</span>
-                                                <span class="product-feature">Гарантія</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-availability in-stock">
-                                            <i class="fas fa-check"></i>
-                                            В наявності
-                                            <span class="stock-count">(25 шт.)</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-price-actions">
-                                        <div class="product-price">
-                                            <span class="current-price">2 199 ₴</span>
-                                            <span class="old-price">2 599 ₴</span>
-                                            <span class="discount-percent">-15%</span>
-                                        </div>
-                                        <div class="product-card-actions">
-                                            <button class="add-to-cart-btn" data-action="add-to-cart">
-                                                <i class="fas fa-shopping-cart"></i>
-                                                В кошик
-                                            </button>
-                                            <button class="quick-view-btn" data-action="quick-view" title="Швидкий перегляд">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Product Card 10 -->
-                            <div class="product-card" data-product-id="10">
-                                <div class="product-image">
-                                    <img src="/placeholder.svg?height=300&width=300&text=Підставка+документи" alt="Підставка для документів регульована" loading="lazy">
-                                    <div class="product-actions">
-                                        <button class="product-action-btn wishlist-btn" title="Додати в список бажань" data-action="wishlist">
-                                            <i class="far fa-heart"></i>
-                                        </button>
-                                        <button class="product-action-btn compare-btn" title="Порівняти" data-action="compare">
-                                            <i class="fas fa-balance-scale"></i>
-                                        </button>
-                                        <button class="product-action-btn quick-view-btn" title="Швидкий перегляд" data-action="quick-view">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="product-info">
-                                    <div class="product-details">
-                                        <div class="product-category">ОРГАНАЙЗЕРИ</div>
-                                        <h3 class="product-title">
-                                            <a href="product.html?id=10">Підставка для документів регульована</a>
-                                        </h3>
-                                        <div class="product-rating">
-                                            <div class="product-stars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="far fa-star"></i>
-                                            </div>
-                                            <span class="product-rating-text">4.3 (340)</span>
-                                        </div>
-                                        <div class="product-features">
-                                            <div class="product-features-list">
-                                                <span class="product-feature">Регульований</span>
-                                                <span class="product-feature">Екологічний</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-availability in-stock">
-                                            <i class="fas fa-check"></i>
-                                            В наявності
-                                            <span class="stock-count">(18 шт.)</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-price-actions">
-                                        <div class="product-price">
-                                            <span class="current-price">449 ₴</span>
-                                        </div>
-                                        <div class="product-card-actions">
-                                            <button class="add-to-cart-btn" data-action="add-to-cart">
-                                                <i class="fas fa-shopping-cart"></i>
-                                                В кошик
-                                            </button>
-                                            <button class="quick-view-btn" data-action="quick-view" title="Швидкий перегляд">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Product Card 11 -->
-                            <div class="product-card" data-product-id="11">
-                                <div class="product-image">
-                                    <img src="/placeholder.svg?height=300&width=300&text=LED+панель" alt="Світлодіодна панель для підсвічування" loading="lazy">
-                                    <div class="product-badges">
-                                        <span class="product-badge badge-new">Новинка</span>
-                                    </div>
-                                    <div class="product-actions">
-                                        <button class="product-action-btn wishlist-btn" title="Додати в список бажань" data-action="wishlist">
-                                            <i class="far fa-heart"></i>
-                                        </button>
-                                        <button class="product-action-btn compare-btn" title="Порівняти" data-action="compare">
-                                            <i class="fas fa-balance-scale"></i>
-                                        </button>
-                                        <button class="product-action-btn quick-view-btn" title="Швидкий перегляд" data-action="quick-view">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="product-info">
-                                    <div class="product-details">
-                                        <div class="product-category">ОСВІТЛЕННЯ</div>
-                                        <h3 class="product-title">
-                                            <a href="product.html?id=11">Світлодіодна панель для підсвічування</a>
-                                        </h3>
-                                        <div class="product-rating">
-                                            <div class="product-stars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="far fa-star"></i>
-                                            </div>
-                                            <span class="product-rating-text">4.5 (290)</span>
-                                        </div>
-                                        <div class="product-features">
-                                            <div class="product-features-list">
-                                                <span class="product-feature">Регульований</span>
-                                                <span class="product-feature">Екологічний</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-availability in-stock">
-                                            <i class="fas fa-check"></i>
-                                            В наявності
-                                            <span class="stock-count">(14 шт.)</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-price-actions">
-                                        <div class="product-price">
-                                            <span class="current-price">1 299 ₴</span>
-                                        </div>
-                                        <div class="product-card-actions">
-                                            <button class="add-to-cart-btn" data-action="add-to-cart">
-                                                <i class="fas fa-shopping-cart"></i>
-                                                В кошик
-                                            </button>
-                                            <button class="quick-view-btn" data-action="quick-view" title="Швидкий перегляд">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Product Card 12 -->
-                            <div class="product-card" data-product-id="12">
-                                <div class="product-image">
-                                    <img src="/placeholder.svg?height=300&width=300&text=Миша+вертикальна" alt="Ергономічна миша вертикальна" loading="lazy">
-                                    <div class="product-badges">
-                                        <span class="product-badge badge-sale">-18%</span>
-                                    </div>
-                                    <div class="product-actions">
-                                        <button class="product-action-btn wishlist-btn" title="Додати в список бажань" data-action="wishlist">
-                                            <i class="far fa-heart"></i>
-                                        </button>
-                                        <button class="product-action-btn compare-btn" title="Порівняти" data-action="compare">
-                                            <i class="fas fa-balance-scale"></i>
-                                        </button>
-                                        <button class="product-action-btn quick-view-btn" title="Швидкий перегляд" data-action="quick-view">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="product-info">
-                                    <div class="product-details">
-                                        <div class="product-category">АКСЕСУАРИ</div>
-                                        <h3 class="product-title">
-                                            <a href="product.html?id=12">Ергономічна миша вертикальна</a>
-                                        </h3>
-                                        <div class="product-rating">
-                                            <div class="product-stars">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="far fa-star"></i>
-                                            </div>
-                                            <span class="product-rating-text">4.4 (670)</span>
-                                        </div>
-                                        <div class="product-features">
-                                            <div class="product-features-list">
-                                                <span class="product-feature">Гарантія</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-availability in-stock">
-                                            <i class="fas fa-check"></i>
-                                            В наявності
-                                            <span class="stock-count">(31 шт.)</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-price-actions">
-                                        <div class="product-price">
-                                            <span class="current-price">899 ₴</span>
-                                            <span class="old-price">1 099 ₴</span>
-                                            <span class="discount-percent">-18%</span>
-                                        </div>
-                                        <div class="product-card-actions">
-                                            <button class="add-to-cart-btn" data-action="add-to-cart">
-                                                <i class="fas fa-shopping-cart"></i>
-                                                В кошик
-                                            </button>
-                                            <button class="quick-view-btn" data-action="quick-view" title="Швидкий перегляд">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <!-- Product cards will be inserted here by JavaScript -->
                         </div>
 
                         <!-- Loading State -->
@@ -1004,12 +321,29 @@
                             <button class="btn btn-primary" onclick="CatalogPage.clearAllFilters()">Очистити фільтри</button>
                         </div>
                     </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination-container" id="pagination-container">
+                        <nav class="pagination" aria-label="Навігація по сторінках">
+                            <button class="pagination-btn prev" type="button" aria-label="Попередня сторінка" disabled>
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <div class="pagination-pages">
+                                <button class="pagination-page active" data-page="1">1</button>
+                                <button class="pagination-page" data-page="2">2</button>
+                                <button class="pagination-page" data-page="3">3</button>
+                            </div>
+                            <button class="pagination-btn next" type="button" aria-label="Наступна сторінка">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </nav>
+                        <div class="pagination-info">
+                            <span>Сторінка 1 з 3 (24 товари)</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
-
-    <!-- Sidebar Overlay -->
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
-<script src="{% static 'main/js/catalog.js' %}"></script>
+<script src="{%static 'main/js/catalog.js'%}"></script>
 {%endblock%}
