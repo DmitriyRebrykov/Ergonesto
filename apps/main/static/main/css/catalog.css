@@ -1081,6 +1081,33 @@
     justify-content: center;
   }
 }
+/* Additional styles for static product cards */
+.product-availability {
+    margin-bottom: 0.75rem;
+}
+
+.availability-text {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.availability-text.in-stock {
+    color: #22c55e;
+}
+
+.availability-text.out-of-stock {
+    color: #e74c3c;
+}
+
+/* Ensure proper data attribute styling */
+.product-card[data-availability="out-of-stock"] .add-to-cart-btn {
+    background: #999;
+    cursor: not-allowed;
+}
+
+.product-card[data-availability="out-of-stock"] .add-to-cart-btn:hover {
+    background: #999;
+}
 
 /* High contrast mode support */
 @media (prefers-contrast: high) {

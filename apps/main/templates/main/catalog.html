@@ -1,23 +1,11 @@
 {%extends 'main/base.html'%}
 {%load static%}
 
-{%block title%}{%endblock title%}
+{%block title%}{{title}}{%endblock title%}
 
 {%block link%}<link type="text/css" href="{% static 'main/css/catalog.css' %}" rel="stylesheet">{%endblock link%}
-{%block content%}
-    <nav class="breadcrumbs" aria-label="Навігаційна стежка">
-        <div class="container">
-            <ol class="breadcrumb-list">
-                <li class="breadcrumb-item">
-                    <a href="index.html" class="breadcrumb-link">Головна</a>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">
-                    Каталог товарів
-                </li>
-            </ol>
-        </div>
-    </nav>
 
+{%block content%}
     <!-- Main Content -->
     <main class="catalog-page">
         <div class="container">
@@ -287,61 +275,119 @@
                 </aside>
 
                 <!-- Products Grid -->
-                <div class="catalog-content">
-                    <!-- Active Filters -->
-                    <div class="active-filters" id="active-filters" style="display: none;">
-                        <div class="active-filters-header">
-                            <span class="active-filters-title">Активні фільтри:</span>
-                            <button class="clear-all-filters" type="button">Очистити все</button>
-                        </div>
-                        <div class="active-filters-list" id="active-filters-list">
-                            <!-- Active filter tags will be inserted here -->
-                        </div>
+                <!-- Products Container -->
+<div class="catalog-content">
+    <!-- Active Filters -->
+    <div class="active-filters" id="active-filters" style="display: none;">
+        <div class="active-filters-header">
+            <span class="active-filters-title">Активні фільтри:</span>
+            <button class="clear-all-filters" type="button">Очистити все</button>
+        </div>
+        <div class="active-filters-list" id="active-filters-list">
+            <!-- Active filter tags will be inserted here -->
+        </div>
+    </div>
+
+    <!-- Products Container -->
+    <div class="products-container" id="products-container">
+        <div class="products-grid" id="products-grid">
+            {%for product in products%}
+            <div class="product-card" data-category="footrests" data-price="2499" data-rating="4.9" data-features="adjustable,eco-friendly,warranty" data-availability="in-stock">
+                <div class="product-image">
+                    <img src="{{product.product.main_image.url}}" alt="ERGONESTO Ергономічна підставка для ніг">
+                    <div class="product-badges">
+                        <span class="product-badge badge-sale">Знижка</span>
+                        <span class="product-badge badge-bestseller">Аб. продажів</span>
                     </div>
-
-                    <!-- Products Container -->
-                    <div class="products-container" id="products-container">
-                        <div class="products-grid" id="products-grid">
-                            <!-- Product cards will be inserted here by JavaScript -->
-                        </div>
-
-                        <!-- Loading State -->
-                        <div class="loading-state" id="loading-state" style="display: none;">
-                            <div class="loading-spinner"></div>
-                            <p>Завантаження товарів...</p>
-                        </div>
-
-                        <!-- No Results State -->
-                        <div class="no-results" id="no-results" style="display: none;">
-                            <div class="no-results-icon">
-                                <i class="fas fa-search"></i>
-                            </div>
-                            <h3>Товари не знайдено</h3>
-                            <p>Спробуйте змінити параметри фільтрації або очистити всі фільтри</p>
-                            <button class="btn btn-primary" onclick="CatalogPage.clearAllFilters()">Очистити фільтри</button>
-                        </div>
-                    </div>
-
-                    <!-- Pagination -->
-                    <div class="pagination-container" id="pagination-container">
-                        <nav class="pagination" aria-label="Навігація по сторінках">
-                            <button class="pagination-btn prev" type="button" aria-label="Попередня сторінка" disabled>
-                                <i class="fas fa-chevron-left"></i>
-                            </button>
-                            <div class="pagination-pages">
-                                <button class="pagination-page active" data-page="1">1</button>
-                                <button class="pagination-page" data-page="2">2</button>
-                                <button class="pagination-page" data-page="3">3</button>
-                            </div>
-                            <button class="pagination-btn next" type="button" aria-label="Наступна сторінка">
-                                <i class="fas fa-chevron-right"></i>
-                            </button>
-                        </nav>
-                        <div class="pagination-info">
-                            <span>Сторінка 1 з 3 (24 товари)</span>
-                        </div>
+                    <div class="product-actions">
+                        <button class="product-action-btn" aria-label="Додати в обране">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <button class="product-action-btn" aria-label="Швидкий перегляд">
+                            <i class="far fa-eye"></i>
+                        </button>
                     </div>
                 </div>
+                <div class="product-info">
+                    <div class="product-category">{{product.sku}}</div>
+                    <h3 class="product-title">
+                        <a href="{%url 'main:detail_page' product.id %}">{{product.product.name}}</a>
+                    </h3>
+                    <div class="product-rating">
+                        <div class="product-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="product-rating-text">49 (2500)</span>
+                    </div>
+                    <div class="product-features">
+                        <div class="product-features-list">
+                            <span class="product-feature">Регульований</span>
+                            <span class="product-feature">Екологічний</span>
+                            <span class="product-feature">Гарантія</span>
+                        </div>
+                    </div>
+                    <div class="product-availability">
+                        <span class="availability-text in-stock">✓ В наявності ({{product.inventory}} шт.)</span>
+                    </div>
+                    <div class="product-price">
+                        <span class="current-price">{{product.price}} ₴</span>
+<!--                        <span class="old-price">3 199 ₴</span>-->
+<!--                        <span class="discount-percent">22%</span>-->
+                    </div>
+                    <div class="product-card-actions">
+                        <button class="add-to-cart-btn">В кошик</button>
+                        <button class="quick-view-btn">
+                            <i class="far fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {%endfor%}
+            <!-- Product Card 1 -->
+
+        </div>
+
+        <!-- Loading State -->
+        <div class="loading-state" id="loading-state" style="display: none;">
+            <div class="loading-spinner"></div>
+            <p>Завантаження товарів...</p>
+        </div>
+
+        <!-- No Results State -->
+        <div class="no-results" id="no-results" style="display: none;">
+            <div class="no-results-icon">
+                <i class="fas fa-search"></i>
+            </div>
+            <h3>Товари не знайдено</h3>
+            <p>Спробуйте змінити параметри фільтрації або очистити всі фільтри</p>
+            <button class="btn btn-primary" id="clear-filters-mobile">Очистити фільтри</button>
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination-container" id="pagination-container">
+        <nav class="pagination" aria-label="Навігація по сторінках">
+            <button class="pagination-btn prev" type="button" aria-label="Попередня сторінка" disabled>
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="pagination-pages">
+                <button class="pagination-page active" data-page="1">1</button>
+                <button class="pagination-page" data-page="2">2</button>
+                <button class="pagination-page" data-page="3">3</button>
+            </div>
+            <button class="pagination-btn next" type="button" aria-label="Наступна сторінка">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </nav>
+        <div class="pagination-info">
+            <span>Сторінка 1 з 3 (24 товари)</span>
+        </div>
+    </div>
+</div>
             </div>
         </div>
     </main>

@@ -5,7 +5,6 @@ from django.db.models.signals import post_delete
 from django.dispatch import receiver
 import os
 
-
 class ProductType(models.TextChoices):
     MODULE = 'MODULE', 'Module'
     FOOTREST = 'FOOTREST', 'Footrest'
@@ -118,6 +117,8 @@ class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product_images')
     image = models.ImageField(upload_to='products/extra/')
 
+
+# in case product should be deleted we use the function to clear media (deleting images)
 @receiver(post_delete, sender=Product)
 def delete_product_image(sender, instance, **kwargs):
     if instance.main_image:
