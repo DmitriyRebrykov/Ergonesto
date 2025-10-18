@@ -339,7 +339,12 @@
 <!--                        <span class="discount-percent">22%</span>-->
                     </div>
                     <div class="product-card-actions">
-                        <button class="add-to-cart-btn">В кошик</button>
+                        <form method="post" action="{% url 'cart:cart_add' product.id %}" class="add-to-cart-form">
+                            {% csrf_token %}
+                            <input type="hidden" name="quantity" value="1">
+                            <input type="hidden" name="next" value="{{ request.path }}">
+                            <button type="submit" class="add-to-cart-btn">В кошик</button>
+                        </form>
                         <button class="quick-view-btn">
                             <i class="far fa-eye"></i>
                         </button>

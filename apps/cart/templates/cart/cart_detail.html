@@ -2,6 +2,7 @@
 {%load static%}
 
 {%block link%}<link type="text/css" href="{% static 'cart/css/cart_detail.css' %}" rel="stylesheet">{%endblock link%}
+
 {%block content%}
     <!-- Main Content -->
     <main class="cart-page">
@@ -33,80 +34,95 @@
                 <div class="cart-items-section">
                     <div class="cart-items-header">
                         <h2>Товари в кошику</h2>
-                        <button class="clear-cart-btn" type="button" aria-label="Очистити кошик">
+                    <form method="post" action="{% url 'cart:cart_clear' %}" class="clear-cart-form">
+                        {% csrf_token %}
+                        <button class="clear-cart-btn" type="submit" aria-label="Очистити кошик">
                             <i class="fas fa-trash"></i>
                             Очистити кошик
                         </button>
+                    </form>
                     </div>
+    <div class="cart-items" id="cart-items">
+    {% if cart %}
+    {% for item in cart %}
+    <div class="cart-item" data-product-id="{{ item.sku }}" data-variant-id="{{ item.product_variant.id }}">
+        <div class="item-image">
+            <img src="{{ item.product_variant.product.main_image.url }}" alt="{{ item.product_name }}" width="120" height="120">
+        </div>
 
-                    <div class="cart-items" id="cart-items">
-                        <!-- Cart Item 1 -->
-                        <div class="cart-item" data-product-id="ERG-FOOT-001">
-                            <div class="item-image">
-                                <img src="{% static 'main/images/img.png' %}" alt="ERGONESTO підставка для ніг" width="120" height="120">
-                            </div>
+        <div class="item-details">
+            <h3 class="item-name">
+                <a href="#">{{ item.product_name }}</a>
+            </h3>
+            <div class="item-options">
+                <span class="option">Колір: <strong>{{ item.color }}</strong></span>
+                <span class="option">Матеріал: <strong>{{ item.material }}</strong></span>
+                <span class="option">Артикул: <strong>{{ item.sku }}</strong></span>
+            </div>
+            <div class="item-availability">
+                <i class="fas fa-check-circle"></i>
+                <span>В наявності</span>
+            </div>
+        </div>
 
-                            <div class="item-details">
-                                <h3 class="item-name">
-                                    <a href="product.html">ERGONESTO Ергономічна підставка для ніг</a>
-                                </h3>
-                                <div class="item-options">
-                                    <span class="option">Колір: <strong>Коричневий</strong></span>
-                                    <span class="option">Артикул: <strong>ERG-FOOT-001</strong></span>
-                                </div>
-                                <div class="item-availability">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>В наявності</span>
-                                </div>
-                            </div>
+<div class="item-quantity">
+    <label class="quantity-label">Кількість:</label>
+    <div class="quantity-controls">
+        <!-- Кнопка минус - уменьшает количество -->
+        <form method="post" action="{% url 'cart:cart_update' item.product_variant.id %}" class="quantity-form">
+            {% csrf_token %}
+            <input type="hidden" name="quantity" value="{{ item.quantity|add:'-1' }}">
+            <button class="quantity-btn minus" type="submit" aria-label="Зменшити кількість"
+                    {% if item.quantity <= 1 %}disabled{% endif %}>
+                <i class="fas fa-minus"></i>
+            </button>
+        </form>
 
-                            <div class="item-quantity">
-                                <label class="quantity-label">Кількість:</label>
-                                <div class="quantity-controls">
-                                    <button class="quantity-btn minus" type="button" aria-label="Зменшити кількість" data-action="decrease">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
-                                    <input type="number" class="quantity-input" value="1" min="1" max="10" aria-label="Кількість товару">
-                                    <button class="quantity-btn plus" type="button" aria-label="Збільшити кількість" data-action="increase">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
+        <span class="quantity-display">{{ item.quantity }}</span>
 
-                            <div class="item-price">
-                                <div class="current-price">2,499 ₴</div>
-                                <div class="old-price">3,199 ₴</div>
-                                <div class="discount">-22%</div>
-                            </div>
+        <!-- Кнопка плюс - добавляет товар через метод добавления -->
+        <form method="post" action="{% url 'cart:cart_add' item.product_variant.id %}" class="quantity-form">
+            {% csrf_token %}
+            <input type="hidden" name="quantity" value="1">
+            <input type="hidden" name="next" value="cart">
+            <button class="quantity-btn plus" type="submit" aria-label="Збільшити кількість">
+                <i class="fas fa-plus"></i>
+            </button>
+        </form>
+    </div>
+</div>
+        <div class="item-total">
+            <div class="total-price">{{ item.total_price }}₴</div>
+        </div>
 
-                            <div class="item-total">
-                                <div class="total-price">2,499 ₴</div>
-                            </div>
-
-                            <div class="item-actions">
-                                <button class="action-btn wishlist-btn" type="button" aria-label="Додати в список бажань" data-action="wishlist">
-                                    <i class="far fa-heart"></i>
-                                </button>
-                                <button class="action-btn remove-btn" type="button" aria-label="Видалити товар" data-action="remove">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Empty Cart State -->
-                    <div class="empty-cart" id="empty-cart" style="display: none;">
-                        <div class="empty-cart-icon">
-                            <i class="fas fa-shopping-cart"></i>
-                        </div>
-                        <h3>Ваш кошик порожній</h3>
-                        <p>Додайте товари до кошика, щоб продовжити покупки</p>
-                        <a href="index.html" class="btn btn-primary">Перейти до каталогу</a>
-                    </div>
+        <div class="item-actions">
+            <button class="action-btn wishlist-btn" type="button" aria-label="Додати в список бажань" data-action="wishlist">
+                <i class="far fa-heart"></i>
+            </button>
+            <form method="post" action="{% url 'cart:cart_remove' item.product_variant.id %}" class="remove-item-form">
+                {% csrf_token %}
+                <button class="action-btn remove-btn" type="submit" aria-label="Видалити товар">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="empty-cart">
+        <div class="empty-cart-icon">
+            <i class="fas fa-shopping-cart"></i>
+        </div>
+        <h3>Ваш кошик порожній</h3>
+        <p>Додайте товари до кошика, щоб продовжити покупки</p>
+        <a href="{% url 'main:view_main_page' %}" class="btn btn-primary">Перейти до каталогу</a>
+    </div>
+    {% endif %}
+    </div>
 
                     <!-- Continue Shopping -->
                     <div class="continue-shopping">
-                        <a href="{%url 'main:view_main_page'%}" class="continue-link">
+                        <a href="{% url 'main:view_main_page' %}" class="continue-link">
                             <i class="fas fa-arrow-left"></i>
                             Продовжити покупки
                         </a>
@@ -119,13 +135,13 @@
                         <h3>Разом до сплати</h3>
 
                         <div class="summary-row">
-                            <span>Товари (2 шт.):</span>
-                            <span class="subtotal">3,798 ₴</span>
+                            <span>Товари ({{ cart|length }} шт.):</span>
+                            <span class="subtotal">{{ cart.get_total_price }}₴</span>
                         </div>
 
                         <div class="summary-row">
                             <span>Знижка:</span>
-                            <span class="discount-amount">-700 ₴</span>
+                            <span class="discount-amount">-0 ₴</span>
                         </div>
 
                         <div class="summary-row">
@@ -137,12 +153,12 @@
 
                         <div class="summary-row total">
                             <span>До сплати:</span>
-                            <span class="total-amount">3,798 ₴</span>
+                            <span class="total-amount">{{ cart.get_total_price }}₴</span>
                         </div>
 
                         <div class="savings-info">
                             <i class="fas fa-piggy-bank"></i>
-                            <span>Ви економите <strong>700 ₴</strong></span>
+                            <span>Ви економите <strong>0 ₴</strong></span>
                         </div>
 
                         <!-- Promo Code -->
@@ -312,3 +328,216 @@
         </div>
     </main>
 {%endblock%}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+    // Обработчики для кнопок +/-
+    document.querySelectorAll('.quantity-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const cartItem = this.closest('.cart-item');
+            const input = cartItem.querySelector('.quantity-input');
+            const variantId = cartItem.getAttribute('data-variant-id');
+            let value = parseInt(input.value);
+
+            if (this.classList.contains('plus')) {
+                value = Math.min(value + 1, parseInt(input.max) || 99);
+            } else if (this.classList.contains('minus')) {
+                value = Math.max(value - 1, parseInt(input.min) || 1);
+            }
+
+            input.value = value;
+            updateCartQuantity(variantId, value, cartItem);
+        });
+    });
+
+    // Обработчик прямого ввода количества
+    document.querySelectorAll('.quantity-input').forEach(input => {
+        input.addEventListener('change', function() {
+            const cartItem = this.closest('.cart-item');
+            const variantId = cartItem.getAttribute('data-variant-id');
+            let value = parseInt(this.value) || 1;
+
+            // Ограничиваем значение
+            const min = parseInt(this.min) || 1;
+            const max = parseInt(this.max) || 99;
+            value = Math.min(Math.max(value, min), max);
+            this.value = value;
+
+            updateCartQuantity(variantId, value, cartItem);
+        });
+
+        // Убираем стрелочки у input number
+        input.addEventListener('wheel', function(e) {
+            e.preventDefault();
+        });
+
+        // Убираем стрелочки в стилях
+        input.style.appearance = 'textfield';
+        input.style.MozAppearance = 'textfield';
+        input.style.WebkitAppearance = 'none';
+    });
+
+    // Функция обновления количества через AJAX
+    function updateCartQuantity(variantId, quantity, cartItem) {
+        fetch(`/cart/update/${variantId}/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': csrfToken,
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `quantity=${quantity}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Обновляем отображение цены
+                const totalPriceElement = cartItem.querySelector('.total-price');
+                if (totalPriceElement && data.item_total_price) {
+                    totalPriceElement.textContent = `${data.item_total_price}₴`;
+                }
+
+                // Обновляем общие суммы в корзине
+                updateCartSummary(data);
+
+                showNotification('Кількість оновлено', 'success');
+            } else {
+                throw new Error(data.message || 'Помилка оновлення');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showNotification('Помилка при оновленні кількості', 'error');
+            // Возвращаем предыдущее значение
+            location.reload();
+        });
+    }
+
+    // Функция обновления общей суммы корзины
+    function updateCartSummary(data) {
+        // Обновляем количество товаров
+        const itemsCountElement = document.querySelector('.summary-row .subtotal');
+        if (itemsCountElement && data.cart_items_count !== undefined) {
+            const currentText = itemsCountElement.textContent;
+            const newText = currentText.replace(/\(\d+ шт\.\)/, `(${data.cart_items_count} шт.)`);
+            itemsCountElement.textContent = newText;
+        }
+
+        // Обновляем подытог
+        if (itemsCountElement && data.cart_total_price) {
+            itemsCountElement.textContent = `Товари (${data.cart_items_count} шт.): ${data.cart_total_price}₴`;
+        }
+
+        // Обновляем общую сумму
+        const totalAmountElement = document.querySelector('.total-amount');
+        if (totalAmountElement && data.cart_total_price) {
+            totalAmountElement.textContent = `${data.cart_total_price}₴`;
+        }
+
+        // Обновляем подытог в общей сумме
+        const subtotalElement = document.querySelector('.subtotal');
+        if (subtotalElement && data.cart_total_price) {
+            subtotalElement.textContent = `${data.cart_total_price}₴`;
+        }
+    }
+
+    // Обработчик для кнопок добавления рекомендованных товаров
+    document.querySelectorAll('.add-recommended-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Здесь можно добавить логику для добавления рекомендованных товаров
+            showNotification('Функція додавання рекомендованих товарів у розробці', 'info');
+        });
+    });
+
+    // Обработчик для кнопки оформления заказа
+    document.getElementById('checkout-btn').addEventListener('click', function() {
+        if (!document.querySelector('.cart-item')) {
+            showNotification('Кошик порожній', 'error');
+            return;
+        }
+        showNotification('Перехід до оформлення замовлення', 'info');
+        // window.location.href = "{% url 'checkout' %}"; // Раскомментировать когда будет страница оформления
+    });
+
+    // Обработчик для промокода
+    document.querySelector('.promo-btn').addEventListener('click', function() {
+        const promoInput = document.querySelector('.promo-input');
+        const promoMessage = document.getElementById('promo-message');
+
+        if (promoInput.value.trim() === '') {
+            promoMessage.textContent = 'Будь ласка, введіть промокод';
+            promoMessage.style.color = '#dc3545';
+            return;
+        }
+
+        // Имитация проверки промокода
+        promoMessage.textContent = 'Промокод перевіряється...';
+        promoMessage.style.color = '#6c757d';
+
+        setTimeout(() => {
+            promoMessage.textContent = 'Промокод не знайдено';
+            promoMessage.style.color = '#dc3545';
+        }, 1500);
+    });
+
+    // Функция показа уведомлений
+    function showNotification(message, type) {
+        // Создаем уведомление
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.textContent = message;
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            background: ${getNotificationColor(type)};
+            color: white;
+            border-radius: 5px;
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+            max-width: 300px;
+        `;
+
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+            notification.style.animation = 'slideOut 0.3s ease';
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
+    }
+
+    function getNotificationColor(type) {
+        const colors = {
+            'success': '#28a745',
+            'error': '#dc3545',
+            'info': '#17a2b8',
+            'warning': '#ffc107'
+        };
+        return colors[type] || '#6c757d';
+    }
+
+    // Добавляем стили для анимации уведомлений
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+        /* Убираем стрелочки у input number */
+        .quantity-input::-webkit-outer-spin-button,
+        .quantity-input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    `;
+    document.head.appendChild(style);
+});
+</script>
+{% endblock %}
